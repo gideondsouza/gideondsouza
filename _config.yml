@@ -1,4 +1,4 @@
 permalink: '/blog/:title/'
-base: http://rubenbristian.com/jackman
+baseurl: "/gideondsouza"
 name: Coded with <3
 author: Gideon Dsouza
