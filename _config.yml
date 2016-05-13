@@ -1,4 +1,4 @@
 permalink: '/blog/:title/'
-base: "https://gideondsouza.github.io/gideondsouza/"
+baseurl: "/gideondsouza"
 name: Coded with <3
 author: Gideon Dsouza
