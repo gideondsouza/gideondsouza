@@ -9,7 +9,7 @@ title: My Blog
 
         <header class="section-header">
             <h4 class="section-title">Welcome to my blog</h4>
-            <span class="section-subtitle">Random thoughts about life &amp; web development</span>
+            <span class="section-subtitle">Thoughts about life, hacking and &amp; programming</span>
         </header>
 
         <ul id="posts-list">
@@ -20,7 +20,7 @@ title: My Blog
                 <time datetime="{{ post.date }}" pubdate>{{ post.date | date_to_string }}</time>
                 <a href="{{ post.url }}"><h3>{{ post.title }}</h3></a>
             </li>
-            
+
             {% endfor %}
 
         </ul>
