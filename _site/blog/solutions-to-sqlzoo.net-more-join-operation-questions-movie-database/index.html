@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Solutions to sqlzoo.net More Join Operation Questions (Movie Database)</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="Jekyll v3.1.3">
+
+    <link rel="canonical" href="/blog/solutions-to-sqlzoo.net-more-join-operation-questions-movie-database/" />
+    <link rel="alternate" type="application/atom+xml" title="Coded with <3 — Feed" href="/blog/feed.atom" />
+
+    <link href='https://fonts.googleapis.com/css?family=Fenix|Montserrat|Playfair+Display:700italic,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div class="page-wrap">
+
+
+<section class="main-header regular">
+
+    <div class="vertical-container">
+
+    	<div class="wrapper clearfix">
+
+	        <header>
+	        	<a href="/">
+		            <h1 id="main-title">Gideon Dsouza</h1>
+		            <h2 id="main-subtitle">Coded with Love</h2>
+	        	</a>
+	        </header>
+
+	        <nav id="main-nav" role="navigation">
+				<a href="/about/" class="">About</a>
+				<a href="/blog/" class="">Blog</a>
+        <a href="http://stackoverflow.com/cv/gideondsouza"
+            class="" target="_blank">Resume</a>
+			</nav>
+      <!-- <section><a href="#">abc</a></section> -->
+		</div>
+
+    </div>
+
+</section>
+
+
+<article class="main-content">
+
+    <div class="wrapper">
+
+        <header class="section-header">
+            <h1 class="section-title">Solutions to sqlzoo.net More Join Operation Questions (Movie Database)</h1>
+            <span class="section-subtitle"><time datetime="2013-01-01 00:00:00 +0530" pubdate>01 Jan 2013</time>, <a class="tag_list_link" href="/tag/sql">sql</a></span>
+        </header>
+
+        <section class="post-content">
+
+        	<p>While meandering around the web for sql exercises and tutorials I came across <a href="http://www.sqlzoo.net">www.sqlzoo.net</a>.</p>
+
+<p>It is the perfect place to get hands on knowledge for SQL, especially JOINS!</p>
+
+<p>Below are solutions to all the questions on the <a href="http://sqlzoo.net/wiki/More_JOIN_operations">More JOIN Operations</a> tutorial. Questions 1-6 are plain straightforward. Questions 7-11 are basic join questions and 12-16 and pretty hard. I ended up spending quite some time trying to solve the last bunch.</p>
+
+<p>Here are all the solutions in case you got stumped. (I just included all questions for completeness)</p>
+
+<h3 id="problem-1--list-the-films-where-the-yr-is-1962-show-id-title">Problem 1 : List the films where the yr is 1962 [Show id, title]</h3>
+<p>This one is pretty straightforward.</p>
+
+<script src="https://gist.github.com/3551780.js"> </script>
+
+<h3 id="problem-2--give-year-of-citizen-kane">Problem 2 : Give year of ‘Citizen Kane’.</h3>
+<p>This one too :</p>
+
+<script src="https://gist.github.com/3551783.js"> </script>
+
+<h3 id="problem-3--list-all-of-the-star-trek-movies-include-the-id-title-and-yr-all-of-these-movies-include-the-words-star-trek-in-the-title">Problem 3 : List all of the Star Trek movies, include the id title and yr. (All of these movies include the words Star Trek in the title.)</h3>
+
+<script src="https://gist.github.com/3551454.js"> </script>
+
+<h3 id="problem-4--what-are-the-titles-of-the-films-with-id-11768-11955-21191">Problem 4 : What are the titles of the films with id 11768, 11955, 21191</h3>
+
+<script src="https://gist.github.com/3551463.js"> </script>
+
+<h3 id="problem-5--what-id-number-does-the-actor-glenn-close-have">Problem 5 : What id number does the actor ‘Glenn Close’ have?</h3>
+
+<script src="https://gist.github.com/3551476.js"> </script>
+
+<h3 id="problem-6--what-is-the-id-of-the-film-casablanca">Problem 6 : What is the id of the film ‘Casablanca’</h3>
+
+<script src="https://gist.github.com/3551479.js"> </script>
+
+<hr />
+
+<p>## Real join questions begin :</p>
+
+<h3 id="problem-7--obtain-the-cast-list-for-casablanca-use-the-id-value-that-you-obtained-in-the-previous-question">Problem 7 : Obtain the cast list for ‘Casablanca’. Use the id value that you obtained in the previous question.</h3>
+
+<script src="https://gist.github.com/3551492.js"> </script>
+
+<h3 id="problem-8--obtain-the-cast-list-for-the-film-alien">Problem 8 : Obtain the cast list for the film ‘Alien’</h3>
+
+<script src="https://gist.github.com/3551529.js"> </script>
+
+<h3 id="problem-9--list-the-films-in-which-harrison-ford-has-appeared">Problem 9 : List the films in which ‘Harrison Ford’ has appeared</h3>
+
+<script src="https://gist.github.com/3551537.js"> </script>
+
+<h3 id="problem-10--list-the-films-where-harrison-ford-has-appeared---but-not-in-the-star-role-note-the-ord-field-of-casting-gives-the-position-of-the-actor-if-ord1-then-this-actor-is-in-the-starring-role">Problem 10 : List the films where ‘Harrison Ford’ has appeared - but not in the star role. [Note: the ord field of casting gives the position of the actor. If ord=1 then this actor is in the starring role]</h3>
+
+<script src="https://gist.github.com/3551544.js"> </script>
+
+<h3 id="problem-11-list-the-films-together-with-the-leading-star-for-all-1962-films">Problem 11: List the films together with the leading star for all 1962 films.</h3>
+
+<script src="https://gist.github.com/3551556.js"> </script>
+
+<hr />
+
+<h2 id="hard-questions">Hard Questions.</h2>
+<p>### These questions are a little bit hard. Give some time to crack them before looking at the solutions.</p>
+
+<h3 id="problem-12--which-were-the-busiest-years-for-john-travolta-show-the-number-of-movies-he-made-for-each-year">Problem 12 : Which were the busiest years for ‘John Travolta’. Show the number of movies he made for each year.</h3>
+
+<script src="https://gist.github.com/3551570.js"> </script>
+
+<h3 id="problem-13--list-the-film-title-and-the-leading-actor-for-all-of-julie-andrews-films">Problem 13 : List the film title and the leading actor for all of ‘Julie Andrews’ films.</h3>
+
+<script src="https://gist.github.com/3551578.js"> </script>
+
+<h3 id="problem-14--obtain-a-list-of-actors-in-who-have-had-at-least-30-starring-roles-yep-the-result-set-this-generates-is-a-empty-set">Problem 14 : Obtain a list of actors in who have had at least 30 starring roles. (Yep, the result set this generates is a empty set)</h3>
+
+<script src="https://gist.github.com/3551585.js"> </script>
+
+<h3 id="problem-15--list-the-1978-films-by-order-of-cast-list-size">Problem 15 : List the 1978 films by order of cast list size.</h3>
+
+<script src="https://gist.github.com/3551594.js"> </script>
+
+<h3 id="problem-16--list-all-the-people-who-have-worked-with-art-garfunkel">Problem 16 : List all the people who have worked with ‘Art Garfunkel’.</h3>
+
+<script src="https://gist.github.com/3551605.js"> </script>
+
+<p>And there you have it! Hope it was helpful.</p>
+
+
+
+            <div class="post-nav">
+
+                <span class="section-subtitle">Share on <a href="https://twitter.com/home?status=Solutions to sqlzoo.net More Join Operation Questions (Movie Database)+www.gideondsouza.com/blog/solutions-to-sqlzoo.net-more-join-operation-questions-movie-database/" target="_blank">Twitter</a>, <a href="https://www.facebook.com/share.php?u=www.gideondsouza.com/blog/solutions-to-sqlzoo.net-more-join-operation-questions-movie-database/&amp;title=Solutions to sqlzoo.net More Join Operation Questions (Movie Database)" target="_blank">Facebook</a>, <a href="https://plus.google.com/share?url=www.gideondsouza.com/blog/solutions-to-sqlzoo.net-more-join-operation-questions-movie-database/" target="_blank">Google+</a></span><br>
+
+				
+                	<a href="/blog/how-to-get-the-current-location-address-and-send-it-to-a-server-on-android/" class="button">Prev</a>
+				
+				
+                	<a href="/blog/the-dawn-of-the-micro-web-frameworks-introducing-dancer/" class="button">Next</a>
+				
+
+            </div>
+            <!-- disqus comments -->
+            <div id="disqus_thread"></div>
+            <script>
+            /**
+            * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+            */
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//gideond.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+              comments powered by Disqus.</a></noscript>
+        </section>
+
+    </div>
+
+</article>
+
+    </div>
+
+<footer class="main-footer">
+
+    <div class="vertical-container">
+
+        <div class="wrapper">
+
+            <p class="copy">&copy; Gideon Dsouza - All Rights Reserved</p>
+
+            <ul class="social">
+                <li><a href="https://twitter.com/thegiddygeek">Twitter</a></li>
+                <li><a href="https://github.com/gideondsouza">GitHub</a></li>
+                <!-- <li><a href="#">LinkedIn</a></li> -->
+            </ul>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- Google analytics script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-26524399-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
+

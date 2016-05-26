@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>How to authenticate with oauth in perl (Dancer, GitHub, LWP::UserAgent)</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="Jekyll v3.1.3">
+
+    <link rel="canonical" href="/blog/how-to-authenticate-with-oauth-in-perl/" />
+    <link rel="alternate" type="application/atom+xml" title="Coded with <3 — Feed" href="/blog/feed.atom" />
+
+    <link href='https://fonts.googleapis.com/css?family=Fenix|Montserrat|Playfair+Display:700italic,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div class="page-wrap">
+
+
+<section class="main-header regular">
+
+    <div class="vertical-container">
+
+    	<div class="wrapper clearfix">
+
+	        <header>
+	        	<a href="/">
+		            <h1 id="main-title">Gideon Dsouza</h1>
+		            <h2 id="main-subtitle">Coded with Love</h2>
+	        	</a>
+	        </header>
+
+	        <nav id="main-nav" role="navigation">
+				<a href="/about/" class="">About</a>
+				<a href="/blog/" class="">Blog</a>
+        <a href="http://stackoverflow.com/cv/gideondsouza"
+            class="" target="_blank">Resume</a>
+			</nav>
+      <!-- <section><a href="#">abc</a></section> -->
+		</div>
+
+    </div>
+
+</section>
+
+
+<article class="main-content">
+
+    <div class="wrapper">
+
+        <header class="section-header">
+            <h1 class="section-title">How to authenticate with oauth in perl (Dancer, GitHub, LWP::UserAgent)</h1>
+            <span class="section-subtitle"><time datetime="2016-05-26 00:00:00 +0530" pubdate>26 May 2016</time>, <a class="tag_list_link" href="/tag/perl">perl</a>, <a class="tag_list_link" href="/tag/web-dev">web-dev</a></span>
+        </header>
+
+        <section class="post-content">
+
+        	<p>I’ve been playing with perl a lot lately and after recently playing with Catalyst, I moved on to Dancer.</p>
+
+<p>Dancer has a <a href="http://search.cpan.org/dist/Dancer/lib/Dancer/Tutorial.pod">nice tutorial</a> with a <a href="https://github.com/PerlDancer/dancer-tutorial">simple dummy blog application. The app is on GitHub here</a>. It describes quite a few aspects about Dancer, including sessions, routes, storage and displaying pages.</p>
+
+<p>It’s a neat little example in that it’s hardly a few files.</p>
+
+<p>Naturally I wanted to get my hands dirty and wanted to try and implement OAuth authentication with github. I don’t mean by pulling a nice CPAN module (there isn’t one) but writing the whole OAuth flow myself. Fortunately I found this to be a simple task.</p>
+
+<p>I managed to change the authentication in the sample dancer app to login with github. <a href="https://github.com/gideondsouza/dancer-tutorial">I added this in a forked project.</a></p>
+
+<p>So I’m going to describe the following:</p>
+
+<ul>
+  <li>Use <a href="http://search.cpan.org/~gaas/libwww-perl-6.04/lib/LWP/UserAgent.pm">LWP::UserAgent</a> to make requests to github</li>
+  <li>Use <a href="https://metacpan.org/module/JSON::Parse">JSON::Parse</a> to gather the response from GitHub</li>
+  <li>Set a session object to the username and avatar img url and use this on the masterpage (main.tt).</li>
+</ul>
+
+<p>So you can see the forked project files. I just changed <a href="https://github.com/gideondsouza/dancer-tutorial/blob/master/dancr.pl">dancr.pl</a> and <a href="https://github.com/gideondsouza/dancer-tutorial/blob/master/views/layouts/main.tt">main.tt</a>. I also removed <code class="highlighter-rouge">login.tt</code> since there is no need for that. You have to <a href="https://github.com/settings/applications">add your application with github</a> and then you’ll get a <code class="highlighter-rouge">client id</code> and <code class="highlighter-rouge">client secret</code>.</p>
+
+<h3 id="step-1-">Step 1 :</h3>
+<p>To login you have to redirect to <code class="highlighter-rouge">https://github.com/login/oauth/authorize</code> with the following params : <code class="highlighter-rouge">YOUR CLIENT ID</code>, <code class="highlighter-rouge">redirect url</code>, <code class="highlighter-rouge">scope</code> (these are permissions you want) and finally <code class="highlighter-rouge">state</code> which is used to prevent <a href="http://www.codinghorror.com/blog/2008/09/cross-site-request-forgeries-and-you.html">cross-site request forgery attacks</a></p>
+
+<script src="https://gist.github.com/4407530.js"></script>
+
+<p>I added two variables on the top and the login route changes to <strong>just</strong> redirect the user to githubs login page. If the user allows your app, then github will send a special <code class="highlighter-rouge">code</code> to your app by calling your <strong>callback url</strong>.</p>
+
+<h3 id="step-2-">Step 2 :</h3>
+<p>Goto your <code class="highlighter-rouge">Github &gt; Account Settings -&gt; Applications -&gt; Your App -&gt; Callback Url</code>. <strong>Note</strong> you can set this to localhost byt specifying it like this <code class="highlighter-rouge">127.0.0.1:&lt;SOMEPORT&gt;</code>. I setup this url to <code class="highlighter-rouge">/auth/github/callback</code>. So in my <code class="highlighter-rouge">dancr.pl</code> I added this route, hopefully the comments should be a good explanation:</p>
+
+<script src="https://gist.github.com/4407631.js"></script>
+
+<p>This route sub uses a helper method that looks like the following, it parses the query string into a hash.</p>
+
+<script src="https://gist.github.com/4407649.js"></script>
+
+<h3 id="step-3-">Step 3 :</h3>
+<p>The above step adds a few session variables if all goes well, so I then use these in the main.tt page like this:</p>
+
+<script src="https://gist.github.com/4407696.js"></script>
+
+<p>And that’s about it. If all goes well your homepage should look like this:</p>
+
+<p><img src="http://i.imgur.com/Or4ksr7.png" alt="Dancr screenie" /></p>
+
+<p>Any comments, feedback and insults about this article are very welcome! :)</p>
+
+
+
+            <div class="post-nav">
+
+                <span class="section-subtitle">Share on <a href="https://twitter.com/home?status=How to authenticate with oauth in perl (Dancer, GitHub, LWP::UserAgent)+www.gideondsouza.com/blog/how-to-authenticate-with-oauth-in-perl/" target="_blank">Twitter</a>, <a href="https://www.facebook.com/share.php?u=www.gideondsouza.com/blog/how-to-authenticate-with-oauth-in-perl/&amp;title=How to authenticate with oauth in perl (Dancer, GitHub, LWP::UserAgent)" target="_blank">Facebook</a>, <a href="https://plus.google.com/share?url=www.gideondsouza.com/blog/how-to-authenticate-with-oauth-in-perl/" target="_blank">Google+</a></span><br>
+
+				
+                	<a href="/blog/why-python-comprehensions-are-the-best-thing-since-sliced-bread/" class="button">Prev</a>
+				
+				
+
+            </div>
+            <!-- disqus comments -->
+            <div id="disqus_thread"></div>
+            <script>
+            /**
+            * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+            */
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//gideond.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+              comments powered by Disqus.</a></noscript>
+        </section>
+
+    </div>
+
+</article>
+
+    </div>
+
+<footer class="main-footer">
+
+    <div class="vertical-container">
+
+        <div class="wrapper">
+
+            <p class="copy">&copy; Gideon Dsouza - All Rights Reserved</p>
+
+            <ul class="social">
+                <li><a href="https://twitter.com/thegiddygeek">Twitter</a></li>
+                <li><a href="https://github.com/gideondsouza">GitHub</a></li>
+                <!-- <li><a href="#">LinkedIn</a></li> -->
+            </ul>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- Google analytics script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-26524399-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
+

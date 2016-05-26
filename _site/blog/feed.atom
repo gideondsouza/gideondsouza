@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title>Coded with &lt;3</title>
+	<link href="/blog/feed.atom" rel="self" />
+	<link href="/" />
+	<id>/</id>
+	<author>
+		<name>Gideon Dsouza</name>
+	</author>
+	<updated>2016-05-26T13:37:11+05:30</updated>
+
+	<entry>
+		<title type="text">How to authenticate with oauth in perl (Dancer, GitHub, LWP::UserAgent)</title>
+		<link href="/blog/how-to-authenticate-with-oauth-in-perl/" />
+		<id>/blog/how-to-authenticate-with-oauth-in-perl/</id>
+		<published>2016-05-26T00:00:00+05:30</published>
+		<updated>2016-05-26T00:00:00+05:30</updated>
+		<summary type="html">I’ve been playing with perl a lot lately and after recently playing with Catalyst, I moved on to Dancer.
+
+</summary>
+		<content type="html">&lt;p&gt;I’ve been playing with perl a lot lately and after recently playing with Catalyst, I moved on to Dancer.&lt;/p&gt;
+
+&lt;p&gt;Dancer has a &lt;a href=&quot;http://search.cpan.org/dist/Dancer/lib/Dancer/Tutorial.pod&quot;&gt;nice tutorial&lt;/a&gt; with a &lt;a href=&quot;https://github.com/PerlDancer/dancer-tutorial&quot;&gt;simple dummy blog application. The app is on GitHub here&lt;/a&gt;. It describes quite a few aspects about Dancer, including sessions, routes, storage and displaying pages.&lt;/p&gt;
+
+&lt;p&gt;It’s a neat little example in that it’s hardly a few files.&lt;/p&gt;
+
+&lt;p&gt;Naturally I wanted to get my hands dirty and wanted to try and implement OAuth authentication with github. I don’t mean by pulling a nice CPAN module (there isn’t one) but writing the whole OAuth flow myself. Fortunately I found this to be a simple task.&lt;/p&gt;
+
+&lt;p&gt;I managed to change the authentication in the sample dancer app to login with github. &lt;a href=&quot;https://github.com/gideondsouza/dancer-tutorial&quot;&gt;I added this in a forked project.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;So I’m going to describe the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Use &lt;a href=&quot;http://search.cpan.org/~gaas/libwww-perl-6.04/lib/LWP/UserAgent.pm&quot;&gt;LWP::UserAgent&lt;/a&gt; to make requests to github&lt;/li&gt;
+  &lt;li&gt;Use &lt;a href=&quot;https://metacpan.org/module/JSON::Parse&quot;&gt;JSON::Parse&lt;/a&gt; to gather the response from GitHub&lt;/li&gt;
+  &lt;li&gt;Set a session object to the username and avatar img url and use this on the masterpage (main.tt).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So you can see the forked project files. I just changed &lt;a href=&quot;https://github.com/gideondsouza/dancer-tutorial/blob/master/dancr.pl&quot;&gt;dancr.pl&lt;/a&gt; and &lt;a href=&quot;https://github.com/gideondsouza/dancer-tutorial/blob/master/views/layouts/main.tt&quot;&gt;main.tt&lt;/a&gt;. I also removed &lt;code class=&quot;highlighter-rouge&quot;&gt;login.tt&lt;/code&gt; since there is no need for that. You have to &lt;a href=&quot;https://github.com/settings/applications&quot;&gt;add your application with github&lt;/a&gt; and then you’ll get a &lt;code class=&quot;highlighter-rouge&quot;&gt;client id&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;client secret&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;step-1-&quot;&gt;Step 1 :&lt;/h3&gt;
+&lt;p&gt;To login you have to redirect to &lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/login/oauth/authorize&lt;/code&gt; with the following params : &lt;code class=&quot;highlighter-rouge&quot;&gt;YOUR CLIENT ID&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;redirect url&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;scope&lt;/code&gt; (these are permissions you want) and finally &lt;code class=&quot;highlighter-rouge&quot;&gt;state&lt;/code&gt; which is used to prevent &lt;a href=&quot;http://www.codinghorror.com/blog/2008/09/cross-site-request-forgeries-and-you.html&quot;&gt;cross-site request forgery attacks&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/4407530.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;I added two variables on the top and the login route changes to &lt;strong&gt;just&lt;/strong&gt; redirect the user to githubs login page. If the user allows your app, then github will send a special &lt;code class=&quot;highlighter-rouge&quot;&gt;code&lt;/code&gt; to your app by calling your &lt;strong&gt;callback url&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;step-2-&quot;&gt;Step 2 :&lt;/h3&gt;
+&lt;p&gt;Goto your &lt;code class=&quot;highlighter-rouge&quot;&gt;Github &amp;gt; Account Settings -&amp;gt; Applications -&amp;gt; Your App -&amp;gt; Callback Url&lt;/code&gt;. &lt;strong&gt;Note&lt;/strong&gt; you can set this to localhost byt specifying it like this &lt;code class=&quot;highlighter-rouge&quot;&gt;127.0.0.1:&amp;lt;SOMEPORT&amp;gt;&lt;/code&gt;. I setup this url to &lt;code class=&quot;highlighter-rouge&quot;&gt;/auth/github/callback&lt;/code&gt;. So in my &lt;code class=&quot;highlighter-rouge&quot;&gt;dancr.pl&lt;/code&gt; I added this route, hopefully the comments should be a good explanation:&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/4407631.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;This route sub uses a helper method that looks like the following, it parses the query string into a hash.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/4407649.js&quot;&gt;&lt;/script&gt;
+
+&lt;h3 id=&quot;step-3-&quot;&gt;Step 3 :&lt;/h3&gt;
+&lt;p&gt;The above step adds a few session variables if all goes well, so I then use these in the main.tt page like this:&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/4407696.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;And that’s about it. If all goes well your homepage should look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/Or4ksr7.png&quot; alt=&quot;Dancr screenie&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Any comments, feedback and insults about this article are very welcome! :)&lt;/p&gt;
+
+</content>
+	</entry>
+
+	<entry>
+		<title type="text">Why python comprehensions are the best thing since sliced bread</title>
+		<link href="/blog/why-python-comprehensions-are-the-best-thing-since-sliced-bread/" />
+		<id>/blog/why-python-comprehensions-are-the-best-thing-since-sliced-bread/</id>
+		<published>2016-05-24T00:00:00+05:30</published>
+		<updated>2016-05-24T00:00:00+05:30</updated>
+		<summary type="html">Ever since I’ve picked up Perl and Python in my free time, I strongly believe in what Bjarne Stroustrup says here : “Nobody should call themselves a professional if they only know one language. Five is a good number.”
+
+</summary>
+		<content type="html">&lt;p&gt;Ever since I’ve picked up &lt;a href=&quot;http://metacpan.org/author/GIDEON&quot;&gt;Perl&lt;/a&gt; and Python in my free time, I strongly believe in what &lt;a href=&quot;http://www.youtube.com/watch?v=NvWTnIoQZj4&quot;&gt;Bjarne Stroustrup says here&lt;/a&gt; : “Nobody should call themselves a professional if they only know one language. Five is a good number.”&lt;/p&gt;
+
+&lt;p&gt;When I came across &lt;a href=&quot;http://en.wikipedia.org/wiki/Language_Integrated_Query&quot;&gt;Linq&lt;/a&gt;, I thought haughtily how C# was so superior to other languages, unfortunately I didn’t know Python then.&lt;/p&gt;
+
+&lt;p&gt;So after learning Python comprehensions from &lt;a href=&quot;https://www.coursera.org/course/matrix&quot;&gt;this coursera course I took&lt;/a&gt;, I got so excited and amazed.  Python comprehensions now are the best thing since sliced bread in my book.&lt;/p&gt;
+
+&lt;p&gt;Here is a quick overview of what you can do with python comprehensions.&lt;/p&gt;
+
+&lt;p&gt;Python has a built in &lt;em&gt;dictionary&lt;/em&gt;, &lt;em&gt;list&lt;/em&gt;, &lt;em&gt;set&lt;/em&gt; and &lt;em&gt;tuple&lt;/em&gt;. Essentially a comprehension is a succinct way to evaluate or generate one of these structures.&lt;/p&gt;
+
+&lt;p&gt;Download the &lt;a href=&quot;http://python.org/download/releases/3.3.2/&quot;&gt;latest python&lt;/a&gt;. Whatever platform you’re in, open a Command Prompt window, and type python, and follow the snippets below. Note: Macs come pre-installed with python, just open the terminal and type python.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/gideondsouza/6460345.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;For a line like this : &lt;code class=&quot;highlighter-rouge&quot;&gt;[x for x in range(10)]&lt;/code&gt; . range(N) returns an enumerable or “loopable” structure. The portion between the &lt;code class=&quot;highlighter-rouge&quot;&gt;[&lt;/code&gt; and the &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; is where you can use x and do pretty much anything with it or return some expression.&lt;/p&gt;
+
+&lt;p&gt;Here is a dumb counter example : &lt;code class=&quot;highlighter-rouge&quot;&gt;[5 for x in range(5)]&lt;/code&gt;. This will generate a list : &lt;code class=&quot;highlighter-rouge&quot;&gt;[5, 5 , 5 , 5 ,5]&lt;/code&gt;. If you did this : &lt;code class=&quot;highlighter-rouge&quot;&gt;[x*5 for x in range(5)]&lt;/code&gt;. You’ll get multiples of five.&lt;/p&gt;
+
+&lt;p&gt;Hopefully you’ve got a hang of it. Now you can add some decisions while building your list.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/gideondsouza/6460422.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Now I shall introduce the set date type. A set in python is an unordered list of &lt;strong&gt;unique&lt;/strong&gt; items.  Note: to create an empty set you do : &lt;code class=&quot;highlighter-rouge&quot;&gt;s = set()&lt;/code&gt;.  If you do this &lt;code class=&quot;highlighter-rouge&quot;&gt;x={}&lt;/code&gt; x becomes a dictionary. Here is the &lt;a href=&quot;http://docs.python.org/3/tutorial/datastructures.html#sets&quot;&gt;python docs for a set.&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/gideondsouza/6460529.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Next, another important type is the tuple, here are the python docs on tuples :&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/gideondsouza/6460607.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Now lets get funky and use two loops in our comprehension to generate permutations and combinations of the numbers 1 to 5&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/gideondsouza/6460685.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Have I got you convinced!?&lt;/p&gt;
+</content>
+	</entry>
+
+	<entry>
+		<title type="text">The Big migration to Jekyll</title>
+		<link href="/blog/the-big-migration-to-jekyll/" />
+		<id>/blog/the-big-migration-to-jekyll/</id>
+		<published>2016-05-21T00:00:00+05:30</published>
+		<updated>2016-05-21T00:00:00+05:30</updated>
+		<summary type="html">So finally after all the obsession, reading and nail-biting I made the long awaited move to Jekyll; a static blog aware site generator.
+
+</summary>
+		<content type="html">&lt;p&gt;So finally after all the obsession, reading and nail-biting I made the long awaited move to &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;; a static blog aware site generator.&lt;/p&gt;
+
+&lt;p&gt;This site used to run on &lt;a href=&quot;http://www.orchardproject.net/&quot;&gt;Orchard&lt;/a&gt;, an impressive asp.net-mvc CMS. I used it for years
+right from it’s inception. After a year though on the linux world I slowly had to let go of a lot of MS’s stuff. I will
+still always have a great relationship with C# though :)&lt;/p&gt;
+
+&lt;p&gt;So, on to Jekyll. Guess there’s not too much I can add that’s already out there. I can dish tips and dispell myths though:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Don’t get too overwhelmed, migrating any site is difficult.&lt;/li&gt;
+  &lt;li&gt;See the docs, especially the &lt;a href=&quot;https://jekyllrb.com/docs/permalinks/&quot;&gt;permalinks&lt;/a&gt; section so your URL’s stay the same.&lt;/li&gt;
+  &lt;li&gt;Free and paid themes both exist : http://jekyllthemes.org/ http://themes.jekyllrc.org/
+The theme usually will usually be site you see, and you’ll have to hack your way chaging it up. This isn’t so bad, especially when github hosts your site with a custom domain for free : https://pages.github.com/&lt;/li&gt;
+  &lt;li&gt;It’s all about simplicity with Jekyll, that’s what I love the most. &lt;a href=&quot;https://jekyllrb.com/docs/plugins/&quot;&gt;Plugins exist&lt;/a&gt;, my theme supports the tag plugin I use from &lt;a href=&quot;http://charliepark.org/tags-in-jekyll/&quot;&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;questions-about-setup&quot;&gt;Questions about setup?&lt;/h3&gt;
+
+&lt;p&gt;I had a few bumps and unknowns before making the move, I’d like to unvite anyone with questions to ask them in the comments and I’d be happy to answer them.&lt;/p&gt;
+</content>
+	</entry>
+
+	<entry>
+		<title type="text">The dawn of the micro web frameworks, introducing dancer</title>
+		<link href="/blog/the-dawn-of-the-micro-web-frameworks-introducing-dancer/" />
+		<id>/blog/the-dawn-of-the-micro-web-frameworks-introducing-dancer/</id>
+		<published>2013-09-10T00:00:00+05:30</published>
+		<updated>2013-09-10T00:00:00+05:30</updated>
+		<summary type="html">Turns out micro-frameworks are really in these days, there is:
+
+</summary>
+		<content type="html">&lt;p&gt;Turns out micro-frameworks are really in these days, there is:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.sinatrarb.com/&quot;&gt;Sinatra&lt;/a&gt; for Ruby (This is grand daddy that inspired everyone else)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.perldancer.org/&quot;&gt;Dancer&lt;/a&gt; for Perl&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://flask.pocoo.org/&quot;&gt;Flask&lt;/a&gt; for Python&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nancyfx.org/&quot;&gt;Nancy&lt;/a&gt; for .NET&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ittc.ku.edu/csdl/fpg/software/scotty.html&quot;&gt;Scotty&lt;/a&gt; for Haskell&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’ve been using Dancer pretty often, I recently built http://www.perlmonksflair.com  with it.&lt;/p&gt;
+
+&lt;p&gt;So this is what a simple dancer app looks like:&lt;/p&gt;
+
+&lt;p&gt;Save the following in my_app.pl&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/gideondsouza/6508444.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Then in your command line:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ perl my_app.pl &amp;amp;
+...
+$ curl http://localhost:3000/
+Hello world!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If you know enough web development you probably get it. This line &lt;code class=&quot;highlighter-rouge&quot;&gt;get &#39;/&#39; =&amp;gt; sub {}&lt;/code&gt; registers the url : / with a subroutine, or more correctly a coderef (a reference to a subroutine)&lt;/p&gt;
+
+&lt;p&gt;That means the homepage (like www.example.com/) will show “Hello world” in the browser.  (In perl the last statement in sub will be the return value)&lt;/p&gt;
+
+&lt;p&gt;Now lets get to something more complicated. Need a webservice, just use this plugin &lt;a href=&quot;https://metacpan.org/module/Dancer::Plugin::REST&quot;&gt;Dancer::Plugin::REST&lt;/a&gt;. This sample is copied straight from the POD for that plugin :P&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/gideondsouza/6508454.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Note if you individually needed to add a route that returned json you could always use to &lt;a href=&quot;https://metacpan.org/module/Dancer#to_json-structure-options&quot;&gt;to_json&lt;/a&gt; method from within a sub.&lt;/p&gt;
+
+&lt;p&gt;Need to do github authentication in your application? Simple use this plugin &lt;a href=&quot;https://metacpan.org/module/Dancer::Plugin::Auth::Github&quot;&gt;Dancer::Plugin::Auth::Github&lt;/a&gt;, yes I wrote this one! :&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/gideondsouza/6508472.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Yes there is a plugin to do authentication for twitter, &lt;a href=&quot;https://metacpan.org/search?q=Dancer%3A%3APlugin&quot;&gt;and more plugins to do other cool stuff&lt;/a&gt; too.&lt;/p&gt;
+
+&lt;p&gt;So what are you waiting for? Go and dance your way into an awesome web application.&lt;/p&gt;
+</content>
+	</entry>
+
+	<entry>
+		<title type="text">Solutions to sqlzoo.net More Join Operation Questions (Movie Database)</title>
+		<link href="/blog/solutions-to-sqlzoo.net-more-join-operation-questions-movie-database/" />
+		<id>/blog/solutions-to-sqlzoo.net-more-join-operation-questions-movie-database/</id>
+		<published>2013-01-01T00:00:00+05:30</published>
+		<updated>2013-01-01T00:00:00+05:30</updated>
+		<summary type="html">While meandering around the web for sql exercises and tutorials I came across [www.sqlzoo.net][1].
+
+</summary>
+		<content type="html">&lt;p&gt;While meandering around the web for sql exercises and tutorials I came across &lt;a href=&quot;http://www.sqlzoo.net&quot;&gt;www.sqlzoo.net&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It is the perfect place to get hands on knowledge for SQL, especially JOINS!&lt;/p&gt;
+
+&lt;p&gt;Below are solutions to all the questions on the &lt;a href=&quot;http://sqlzoo.net/wiki/More_JOIN_operations&quot;&gt;More JOIN Operations&lt;/a&gt; tutorial. Questions 1-6 are plain straightforward. Questions 7-11 are basic join questions and 12-16 and pretty hard. I ended up spending quite some time trying to solve the last bunch.&lt;/p&gt;
+
+&lt;p&gt;Here are all the solutions in case you got stumped. (I just included all questions for completeness)&lt;/p&gt;
+
+&lt;h3 id=&quot;problem-1--list-the-films-where-the-yr-is-1962-show-id-title&quot;&gt;Problem 1 : List the films where the yr is 1962 [Show id, title]&lt;/h3&gt;
+&lt;p&gt;This one is pretty straightforward.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551780.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-2--give-year-of-citizen-kane&quot;&gt;Problem 2 : Give year of ‘Citizen Kane’.&lt;/h3&gt;
+&lt;p&gt;This one too :&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551783.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-3--list-all-of-the-star-trek-movies-include-the-id-title-and-yr-all-of-these-movies-include-the-words-star-trek-in-the-title&quot;&gt;Problem 3 : List all of the Star Trek movies, include the id title and yr. (All of these movies include the words Star Trek in the title.)&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551454.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-4--what-are-the-titles-of-the-films-with-id-11768-11955-21191&quot;&gt;Problem 4 : What are the titles of the films with id 11768, 11955, 21191&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551463.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-5--what-id-number-does-the-actor-glenn-close-have&quot;&gt;Problem 5 : What id number does the actor ‘Glenn Close’ have?&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551476.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-6--what-is-the-id-of-the-film-casablanca&quot;&gt;Problem 6 : What is the id of the film ‘Casablanca’&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551479.js&quot;&gt; &lt;/script&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;## Real join questions begin :&lt;/p&gt;
+
+&lt;h3 id=&quot;problem-7--obtain-the-cast-list-for-casablanca-use-the-id-value-that-you-obtained-in-the-previous-question&quot;&gt;Problem 7 : Obtain the cast list for ‘Casablanca’. Use the id value that you obtained in the previous question.&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551492.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-8--obtain-the-cast-list-for-the-film-alien&quot;&gt;Problem 8 : Obtain the cast list for the film ‘Alien’&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551529.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-9--list-the-films-in-which-harrison-ford-has-appeared&quot;&gt;Problem 9 : List the films in which ‘Harrison Ford’ has appeared&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551537.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-10--list-the-films-where-harrison-ford-has-appeared---but-not-in-the-star-role-note-the-ord-field-of-casting-gives-the-position-of-the-actor-if-ord1-then-this-actor-is-in-the-starring-role&quot;&gt;Problem 10 : List the films where ‘Harrison Ford’ has appeared - but not in the star role. [Note: the ord field of casting gives the position of the actor. If ord=1 then this actor is in the starring role]&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551544.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-11-list-the-films-together-with-the-leading-star-for-all-1962-films&quot;&gt;Problem 11: List the films together with the leading star for all 1962 films.&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551556.js&quot;&gt; &lt;/script&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;hard-questions&quot;&gt;Hard Questions.&lt;/h2&gt;
+&lt;p&gt;### These questions are a little bit hard. Give some time to crack them before looking at the solutions.&lt;/p&gt;
+
+&lt;h3 id=&quot;problem-12--which-were-the-busiest-years-for-john-travolta-show-the-number-of-movies-he-made-for-each-year&quot;&gt;Problem 12 : Which were the busiest years for ‘John Travolta’. Show the number of movies he made for each year.&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551570.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-13--list-the-film-title-and-the-leading-actor-for-all-of-julie-andrews-films&quot;&gt;Problem 13 : List the film title and the leading actor for all of ‘Julie Andrews’ films.&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551578.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-14--obtain-a-list-of-actors-in-who-have-had-at-least-30-starring-roles-yep-the-result-set-this-generates-is-a-empty-set&quot;&gt;Problem 14 : Obtain a list of actors in who have had at least 30 starring roles. (Yep, the result set this generates is a empty set)&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551585.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-15--list-the-1978-films-by-order-of-cast-list-size&quot;&gt;Problem 15 : List the 1978 films by order of cast list size.&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551594.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;problem-16--list-all-the-people-who-have-worked-with-art-garfunkel&quot;&gt;Problem 16 : List all the people who have worked with ‘Art Garfunkel’.&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/3551605.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;And there you have it! Hope it was helpful.&lt;/p&gt;
+
+</content>
+	</entry>
+
+	<entry>
+		<title type="text">How to get the current location, address and send it to a server on android</title>
+		<link href="/blog/how-to-get-the-current-location-address-and-send-it-to-a-server-on-android/" />
+		<id>/blog/how-to-get-the-current-location-address-and-send-it-to-a-server-on-android/</id>
+		<published>2012-06-03T00:00:00+05:30</published>
+		<updated>2012-06-03T00:00:00+05:30</updated>
+		<summary type="html">Location, Location, Location! Well this article isn’t all about location.
+
+</summary>
+		<content type="html">&lt;p&gt;Location, Location, Location! Well this article isn’t all about location.&lt;/p&gt;
+
+&lt;p&gt;Things I will cover in this article:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Get the location of the users device (via the NETWORK). This will be latitude and longitude.&lt;/li&gt;
+  &lt;li&gt;Reverse-Geo code information from the first step and get an address&lt;/li&gt;
+  &lt;li&gt;Send that off to a server via Http GET. (This is typically what you would want to do given a location ;) )&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;getting-a-location&quot;&gt;Getting a location&lt;/h3&gt;
+
+&lt;p&gt;So first off, how do we get the users current latitude and longitude? There are two options (1) We could use the Network (2) Or the GPS. Somehow, getting a location from the network is quite accurate (I tested it a couple times) and it’s fairly fast. Getting a location from the GPS then isn’t too difficult.&lt;/p&gt;
+
+&lt;p&gt;So in a default Android application you would want to add the following permission in your AndroidManifest.xml :&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This is if you’re using the network, to use the GPS you would need:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I have an &lt;code class=&quot;highlighter-rouge&quot;&gt;AddressActivity.java&lt;/code&gt; and a &lt;code class=&quot;highlighter-rouge&quot;&gt;main.xml&lt;/code&gt;. My view looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/jk5Fczm.jpg?1&quot; alt=&quot;My Activity View &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The first button gets my location and the code is below. This is pretty straightforward and the snippet is plagiarized straight from the &lt;a href=&quot;http://developer.android.com/guide/topics/location/obtaining-user-location.html&quot;&gt;Android docs here&lt;/a&gt;. I have two activity level variables &lt;code class=&quot;highlighter-rouge&quot;&gt;lat&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;lon&lt;/code&gt;, I store the locations here so I can use them later.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/2864370.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;To get a location from the GPS you would just change this line:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;getting-an-address&quot;&gt;Getting an Address&lt;/h3&gt;
+
+&lt;p&gt;The magic for reverse geo-coding comes from the &lt;a href=&quot;http://developer.android.com/reference/android/location/Geocoder.html&quot;&gt;Geocoder class&lt;/a&gt;.  You would need the Internet permission in your manifest and this results in an internet call.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I encapsulate all my geocoder stuff into a &lt;code class=&quot;highlighter-rouge&quot;&gt;GetAddress()&lt;/code&gt; function which I call from my &lt;code class=&quot;highlighter-rouge&quot;&gt;btnAddress&lt;/code&gt;. It looks like this:&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/2864432.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;send-to-the-internet&quot;&gt;Send to the Internet&lt;/h3&gt;
+
+&lt;p&gt;Now typically when you get this far, you want to send this information off to your server somewhere and then do something useful with it. So the last function &lt;code class=&quot;highlighter-rouge&quot;&gt;postData()&lt;/code&gt; sends a latitude and longitude to my server. I made little dummy program on AppHabour in ASP.NET-MVC3. It sends the data via GET through a URL.&lt;/p&gt;
+
+&lt;p&gt;No doubt you need the INTERNET permission as I described earlier. The code looks like this:&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/2864460.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;And there you have it!&lt;/p&gt;
+
+&lt;p&gt;You can &lt;a href=&quot;https://www.dropbox.com/s/5qp1rbo44sw1si9/AndroidAddressApp.zip?dl=0&quot;&gt;download a fully runnable project of all this code from here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Hopefully soon I will use an AsyncTask to wrap up all of this code, so it happens asynchronously.&lt;/p&gt;
+
+</content>
+	</entry>
+
+</feed>
