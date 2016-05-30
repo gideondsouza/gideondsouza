@@ -7,7 +7,7 @@
 	<author>
 		<name>Gideon Dsouza</name>
 	</author>
-	<updated>2016-05-26T22:16:21+05:30</updated>
+	<updated>2016-05-30T20:14:08+05:30</updated>
 
 	<entry>
 		<title type="text">How to authenticate with oauth in perl (Dancer, GitHub, LWP::UserAgent)</title>
@@ -294,6 +294,31 @@ Hello world!
 &lt;script src=&quot;https://gist.github.com/3551605.js&quot;&gt; &lt;/script&gt;
 
 &lt;p&gt;And there you have it! Hope it was helpful.&lt;/p&gt;
+
+</content>
+	</entry>
+
+	<entry>
+		<title type="text">Scanning multiple documents with WIA 2.0 (ADF Scanner)</title>
+		<link href="/blog/scanning-multiple-documents-with-wia-2.0-adf-scanner/" />
+		<id>/blog/scanning-multiple-documents-with-wia-2.0-adf-scanner/</id>
+		<published>2012-12-29T00:00:00+05:30</published>
+		<updated>2012-12-29T00:00:00+05:30</updated>
+		<summary type="html">So a long time ago I had to do a project that involved getting images from a scanner with an auto document feeder. It was a challenge doing this with WIA (Windows Imaging Aquisation) but I found some code somewhere online and made it into a nice library.
+
+</summary>
+		<content type="html">&lt;p&gt;So a long time ago I had to do a project that involved getting images from a scanner with an auto document feeder. It was a challenge doing this with WIA (&lt;a href=&quot;https://en.wikipedia.org/wiki/Windows_Image_Acquisition&quot;&gt;Windows Imaging Aquisation&lt;/a&gt;) but I found some code somewhere online and made it into a nice library.&lt;/p&gt;
+
+&lt;p&gt;Today I finally shared this library with the world here: &lt;a href=&quot;http://adfwia.codeplex.com/&quot;&gt;http://adfwia.codeplex.com/&lt;/a&gt;&lt;br /&gt;
+[&lt;strong&gt;Update&lt;/strong&gt;-15Dec2011]: I put it up on github too: &lt;a href=&quot;https://github.com/gideondsouza/AutoDocumentFeed_for_WIA&quot;&gt;https://github.com/gideondsouza/AutoDocumentFeed_for_WIA&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;It includes the source under the MIT License, it also has a little test app you can play with.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Some scanners have trouble with the DIP setting. If you get: &lt;code class=&quot;highlighter-rouge&quot;&gt;Unhandled Exception : Value does not fall within range.&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Try a higher or lower DPI.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/wHoqull.jpg&quot; alt=&quot;ADF-Scanner-App&quot; /&gt;&lt;/p&gt;
 
 </content>
 	</entry>
