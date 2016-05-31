@@ -7,7 +7,66 @@
 	<author>
 		<name>Gideon Dsouza</name>
 	</author>
-	<updated>2016-05-30T20:14:08+05:30</updated>
+	<updated>2016-05-31T10:23:38+05:30</updated>
+
+	<entry>
+		<title type="text">Uploading images with Ruby and Sinatra</title>
+		<link href="/blog/uploading-images-with-ruby-and-sinatra/" />
+		<id>/blog/uploading-images-with-ruby-and-sinatra/</id>
+		<published>2016-05-31T00:00:00+05:30</published>
+		<updated>2016-05-31T00:00:00+05:30</updated>
+		<summary type="html">So if you may have noticed, I have a thing for micro frameworks.
+
+</summary>
+		<content type="html">&lt;p&gt;So if you may have noticed, I have a thing for &lt;a href=&quot;http://www.gideondsouza.com/blog/the-dawn-of-the-micro-web-frameworks-introducing-dancer/&quot;&gt;micro frameworks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I’ve recently taken the step to learning Ruby. I’ve usually found that reading long books, and guides tend to be boring and not very pratical. You can do 80% of what is done in a language by learning the important 20%. (Something on the lines of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Pareto_principle&quot;&gt;Pareto principle&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;I start always with the aim to &lt;strong&gt;do&lt;/strong&gt; something in any programming language I’m learning. This way I learn the important 20%.&lt;/p&gt;
+
+&lt;p&gt;Most of development today is focused on web development, invariably, at some point you want to build a web-app. Micro frameworks are a great way to start.&lt;/p&gt;
+
+&lt;p&gt;So I played a little with Ruby and &lt;a href=&quot;sinatrarb.com&quot;&gt;Sinatra&lt;/a&gt; and decided to build something of a file manager, maybe integrate it into dropbox, we’ll see.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;This is the first round&lt;/strong&gt; of that plan, a simple little web-app that uploads images into a folder and then shows you the image once you’ve uploaded it.&lt;/p&gt;
+
+&lt;p&gt;Make sure you have ruby and install sinatra like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install sinatra
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Your files should look like this (the code is below):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[gideon@gideon-fedora image_manager]$ tree
+.
+├── img_mgr.rb
+├── public
+└── views
+    ├── form.erb
+    └── show_image.erb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;A quick rundown:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sinatra serves static files from a folder named &lt;em&gt;public&lt;/em&gt;. We’ll write our image into this folder.&lt;/li&gt;
+  &lt;li&gt;We’ll use erb, yes there are &lt;a href=&quot;http://www.sinatrarb.com/intro.html#Available%20Template%20Languages&quot;&gt;so wow so much views engines&lt;/a&gt;. The cool kids seem to like Haml.&lt;/li&gt;
+  &lt;li&gt;We have two routes (1) &lt;em&gt;’/’&lt;/em&gt; and (2) &lt;em&gt;‘/show_image’&lt;/em&gt; corresponding to our views with will serve the upload (1) &lt;em&gt;form.erb&lt;/em&gt; and then show the image with &lt;em&gt;show_image.erb&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here comes the code :&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/gideondsouza/fc7e990030b17884d79efb28b74ced2e.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;https://gist.github.com/gideondsouza/f3a55300cc1002054fdf17ddd2468e38.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;https://gist.github.com/gideondsouza/aa2396b5cd59429f4a082b05f4c8bc3f.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Hopefully most of this will look self-explainatory and help you get your hands dirty. I’m going to try and make this a series where I eventually develop this into a little bit of an actual app.&lt;/p&gt;
+</content>
+	</entry>
 
 	<entry>
 		<title type="text">How to authenticate with oauth in perl (Dancer, GitHub, LWP::UserAgent)</title>

@@ -4,24 +4,31 @@
 	<!-- Pages -->
 	<url>
 		<loc></loc>
-		<lastmod>2016-05-30T20:14:08+05:30</lastmod>
+		<lastmod>2016-05-31T10:23:38+05:30</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
 	<url>
 		<loc>/blog/</loc>
-		<lastmod>2016-05-30T20:14:08+05:30</lastmod>
+		<lastmod>2016-05-31T10:23:38+05:30</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
 	<url>
 		<loc>/about/</loc>
-		<lastmod>2016-05-30T20:14:08+05:30</lastmod>
+		<lastmod>2016-05-31T10:23:38+05:30</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
 
 	<!-- Posts -->
+	
+	<url>
+		<loc>/blog/uploading-images-with-ruby-and-sinatra/</loc>
+		<lastmod>2016-05-31</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.9</priority>
+	</url>
 	
 	<url>
 		<loc>/blog/how-to-authenticate-with-oauth-in-perl/</loc>
