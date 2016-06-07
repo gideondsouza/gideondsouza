@@ -2,6 +2,7 @@
 layout: post
 title:  The Big migration to Jekyll
 tags:
+- ruby
 - jekyll
 - web-dev
 ---
