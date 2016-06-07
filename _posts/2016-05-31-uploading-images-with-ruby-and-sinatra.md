@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Uploading images with Ruby, Sinatra and Uploadify
+title:  Uploading images with Ruby and Sinatra
 tags:
 - ruby
 - web-dev

@@ -7,12 +7,12 @@
 	<author>
 		<name>Gideon Dsouza</name>
 	</author>
-	<updated>2016-05-31T16:00:09+05:30</updated>
+	<updated>2016-06-07T13:11:34+05:30</updated>
 
 	<entry>
-		<title type="text">Uploading multiple images with Ruby and Sinatra Uploadify.</title>
-		<link href="/blog/uploading-multiple-images-with-ruby-and-sinatra/" />
-		<id>/blog/uploading-multiple-images-with-ruby-and-sinatra/</id>
+		<title type="text">Uploading multiple images with Ruby, Sinatra and Uploadify.</title>
+		<link href="/blog/uploading-multiple-images-with-ruby-and-sinatra-and-uploadify/" />
+		<id>/blog/uploading-multiple-images-with-ruby-and-sinatra-and-uploadify/</id>
 		<published>2016-05-31T00:00:00+05:30</published>
 		<updated>2016-05-31T00:00:00+05:30</updated>
 		<summary type="html">This is the finished product:
@@ -78,7 +78,7 @@
 
 &lt;p&gt;To execute all you need to do is :&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  $ shotgun img_mgr.rb 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  $ shotgun img_mgr.rb
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 

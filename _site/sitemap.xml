@@ -4,19 +4,19 @@
 	<!-- Pages -->
 	<url>
 		<loc></loc>
-		<lastmod>2016-05-31T16:00:09+05:30</lastmod>
+		<lastmod>2016-06-07T13:11:34+05:30</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
 	<url>
 		<loc>/blog/</loc>
-		<lastmod>2016-05-31T16:00:09+05:30</lastmod>
+		<lastmod>2016-06-07T13:11:34+05:30</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
 	<url>
 		<loc>/about/</loc>
-		<lastmod>2016-05-31T16:00:09+05:30</lastmod>
+		<lastmod>2016-06-07T13:11:34+05:30</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
@@ -24,7 +24,7 @@
 	<!-- Posts -->
 	
 	<url>
-		<loc>/blog/uploading-multiple-images-with-ruby-and-sinatra/</loc>
+		<loc>/blog/uploading-multiple-images-with-ruby-and-sinatra-and-uploadify/</loc>
 		<lastmod>2016-05-31</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.9</priority>
