@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
+    <!-- <link href="/css/syntax.css" rel="stylesheet"> -->
+
     <!--[if lt IE 9]>
     <script src="/js/html5shiv.js"></script>
     <script src="/js/respond.min.js"></script>
@@ -113,13 +115,67 @@
 
 <p>Here is our sinatra app:</p>
 
-<script src="https://gist.github.com/gideondsouza/59f1d9ccb2551d0c06e8c47351a063f8.js"></script>
+<!-- <script src="https://gist.github.com/gideondsouza/59f1d9ccb2551d0c06e8c47351a063f8.js"></script> -->
+<p><a href="https://gist.github.com/gideondsouza/59f1d9ccb2551d0c06e8c47351a063f8">img_mgr.rb</a> :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>require 'sinatra'
+
+get '/' do
+  erb :form_multiple
+end
+
+post '/upload' do
+#this method will get as ajax call for every file uploaded
+  @filename = params[:Filename]
+  file = params[:Filedata][:tempfile]
+
+  File.open("./public/#{@filename}", 'wb') do |f|
+    f.write(file.read)
+  end
+
+  #return filename as the response, the file we just wrote.
+  return @filename
+end
+</code></pre>
+</div>
 
 <p>The home page route <em>’/’</em> serves the <em>form_multiple.erb</em> file. This will use uploadify to set itself up. It will make requests to the <em>‘/upload’</em> route. In here we get the filename from <em>params[:Filename]</em> and the file object from <em>file = params[:Filedata][:tempfile]</em>. If you want to know how I figured this out, I simple wrote in <em>puts params</em>. This gets printed into the console and you can check out the object yourself then. I write the file into the <em>/public</em> folder. It can be served them from the root of the wherever this is hosted.</p>
 
 <p>The view looks like this:</p>
 
-<script src="https://gist.github.com/gideondsouza/1367104cfc8a83c4b5c924fe467d6032.js"></script>
+<p><a href="https://gist.github.com/gideondsouza/1367104cfc8a83c4b5c924fe467d6032#file-form_multiple-erb">form_multiple.erb</a> :
+<!-- <script src="https://gist.github.com/gideondsouza/1367104cfc8a83c4b5c924fe467d6032.js"></script> --></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Image Upload<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"uploadify.css"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-1.7.2.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"jquery.uploadify.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+
+        <span class="nt">&lt;h1&gt;</span>Upload Images<span class="nt">&lt;/h1&gt;</span>
+
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"file_upload"</span> <span class="na">id=</span><span class="s">"file_upload"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;script&gt;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">$</span><span class="p">(</span><span class="s1">'#file_upload'</span><span class="p">).</span><span class="nx">uploadify</span><span class="p">({</span>
+              <span class="s1">'swf'</span>      <span class="p">:</span> <span class="s1">'uploadify.swf'</span><span class="p">,</span>
+              <span class="s1">'uploader'</span> <span class="p">:</span> <span class="s1">'/upload'</span><span class="p">,</span>
+              <span class="s1">'onUploadSuccess'</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+                  <span class="nx">$</span><span class="p">(</span><span class="s2">"#images"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">"&lt;img src='/"</span> <span class="o">+</span> <span class="nx">data</span> <span class="o">+</span> <span class="s2">"' height='100px'/&gt;"</span><span class="p">);</span>
+              <span class="p">}</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"images"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;strong&gt;</span>Uploaded images here:<span class="nt">&lt;/strong&gt;&lt;br</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
 
 <p>If you notice in our server(sinatra) app we return the filename as a response, this is what the uploadify plugin will give us in the <em>onUploadSuccess</em> handler. All we do it append an image tag into our predefined div.</p>
 

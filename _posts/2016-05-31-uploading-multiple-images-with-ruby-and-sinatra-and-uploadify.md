@@ -47,13 +47,63 @@ All our meat is in two files _img_mgr.rb_ and _form_multiple.erb_
 
 Here is our sinatra app:
 
-<script src="https://gist.github.com/gideondsouza/59f1d9ccb2551d0c06e8c47351a063f8.js"></script>
+<!-- <script src="https://gist.github.com/gideondsouza/59f1d9ccb2551d0c06e8c47351a063f8.js"></script> -->
+[img_mgr.rb](https://gist.github.com/gideondsouza/59f1d9ccb2551d0c06e8c47351a063f8) :
+
+    require 'sinatra'
+
+    get '/' do
+      erb :form_multiple
+    end
+
+    post '/upload' do
+    #this method will get as ajax call for every file uploaded
+      @filename = params[:Filename]
+      file = params[:Filedata][:tempfile]
+
+      File.open("./public/#{@filename}", 'wb') do |f|
+        f.write(file.read)
+      end
+
+      #return filename as the response, the file we just wrote.
+      return @filename
+    end
 
 The home page route _'/'_ serves the _form_multiple.erb_ file. This will use uploadify to set itself up. It will make requests to the _'/upload'_ route. In here we get the filename from _params[:Filename]_ and the file object from _file = params[:Filedata][:tempfile]_. If you want to know how I figured this out, I simple wrote in _puts params_. This gets printed into the console and you can check out the object yourself then. I write the file into the _/public_ folder. It can be served them from the root of the wherever this is hosted.
 
 The view looks like this:
 
-<script src="https://gist.github.com/gideondsouza/1367104cfc8a83c4b5c924fe467d6032.js"></script>
+[form_multiple.erb](https://gist.github.com/gideondsouza/1367104cfc8a83c4b5c924fe467d6032#file-form_multiple-erb) :
+<!-- <script src="https://gist.github.com/gideondsouza/1367104cfc8a83c4b5c924fe467d6032.js"></script> -->
+
+    <html>
+        <head>
+            <title>Image Upload</title>
+            <link rel="stylesheet" type="text/css" href="uploadify.css" />
+            <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+            <script type="text/javascript" src="jquery.uploadify.min.js"></script>
+        </head>
+        <body>
+
+            <h1>Upload Images</h1>
+
+            <input type="file" name="file_upload" id="file_upload" />
+            <script>
+            $(function() {
+              $('#file_upload').uploadify({
+                  'swf'      : 'uploadify.swf',
+                  'uploader' : '/upload',
+                  'onUploadSuccess' : function(file, data, response) {
+                      $("#images").append("<img src='/" + data + "' height='100px'/>");
+                  }
+                });
+            });
+        </script>
+        <div id="images">
+        <strong>Uploaded images here:</strong><br />
+        </div>
+        </body>
+    </html>
 
 If you notice in our server(sinatra) app we return the filename as a response, this is what the uploadify plugin will give us in the _onUploadSuccess_ handler. All we do it append an image tag into our predefined div.
 
