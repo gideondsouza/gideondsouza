@@ -49,7 +49,7 @@ Your [HomeController.cs](https://gist.github.com/gideondsouza/4284314#file-homec
 
 **Note** : Uploadify names the file it sends as 'Filedata'.
 
-For the view [Index.cshtml](https://gist.github.com/gideondsouza/4284335) should look like this:
+For the view [Index.cshtml](https://gist.github.com/gideondsouza/4284335) should look like the following. Put your js/css etc files from the uploadify.zip into `/Scripts` in your asp.net-mvc project :
 
     @{
         Layout = null;
