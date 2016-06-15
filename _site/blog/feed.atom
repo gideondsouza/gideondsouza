@@ -7,7 +7,7 @@
 	<author>
 		<name>Gideon Dsouza</name>
 	</author>
-	<updated>2016-06-09T19:41:31+05:30</updated>
+	<updated>2016-06-15T13:15:19+05:30</updated>
 
 	<entry>
 		<title type="text">Uploading multiple images with Ruby, Sinatra and Uploadify.</title>
@@ -335,6 +335,113 @@ The theme usually will usually be site you see, and you’ll have to hack your w
 &lt;h3 id=&quot;questions-about-setup&quot;&gt;Questions about setup?&lt;/h3&gt;
 
 &lt;p&gt;I had a few bumps and unknowns before making the move, I’d like to unvite anyone with questions to ask them in the comments and I’d be happy to answer them.&lt;/p&gt;
+</content>
+	</entry>
+
+	<entry>
+		<title type="text">ajax upload files with asp.net-mvc and uploadify</title>
+		<link href="/blog/ajax-upload-files-with-asp.net-mvc-and-uploadify/" />
+		<id>/blog/ajax-upload-files-with-asp.net-mvc-and-uploadify/</id>
+		<published>2014-12-04T00:00:00+05:30</published>
+		<updated>2014-12-04T00:00:00+05:30</updated>
+		<summary type="html">After answering a question on stackoverflow I realized uploading files with ajax was something everyone was looking for.
+
+</summary>
+		<content type="html">&lt;p&gt;After answering a question on stackoverflow I realized uploading files with ajax was something everyone was looking for.&lt;/p&gt;
+
+&lt;p&gt;So to commemorate the &lt;a href=&quot;http://stackoverflow.com/badges/310/asp-net-mvc?userid=368070&quot;&gt;asp.net-mvc badge&lt;/a&gt; I won recently I’m writing a full example of how to do this with asp.net-mvc.&lt;/p&gt;
+
+&lt;p&gt;I’ll use the &lt;a href=&quot;http://www.uploadify.com&quot;&gt;uploadify jquery plugin&lt;/a&gt;. There are &lt;a href=&quot;http://www.webdeveloperjuice.com/2010/02/13/7-trusted-ajax-file-upload-plugins-using-jquery/&quot;&gt;many others&lt;/a&gt; you can use too.&lt;/p&gt;
+
+&lt;p&gt;So all in all it’s pretty simple. We’ll create something that looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/Hm2R6sw.png&quot; alt=&quot;Asp.net-mvc Ajax Upload screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It allows you to select multiple files, uploads them asynchronously. Then appends a link to the file, assuming it’s an image.&lt;/p&gt;
+
+&lt;p&gt;I uploaded a picture of my &lt;a href=&quot;https://www.sparkfun.com/products/9284&quot;&gt;Arduino Starter Kit&lt;/a&gt; :)&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-&quot;&gt;How to :&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Create a new asp.net mvc4 web application.&lt;/li&gt;
+  &lt;li&gt;Delete the &lt;code class=&quot;highlighter-rouge&quot;&gt;Index.cshtml&lt;/code&gt; page under &lt;code class=&quot;highlighter-rouge&quot;&gt;\View\Home\&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Open &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.cs&lt;/code&gt; and Right Click the &lt;code class=&quot;highlighter-rouge&quot;&gt;Index()&lt;/code&gt; method.&lt;/li&gt;
+  &lt;li&gt;Click Add View, and uncheck &lt;em&gt;Use a Layout or Master Page&lt;/em&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Create an upload method like the following code snippet.
+Your &lt;a href=&quot;https://gist.github.com/gideondsouza/4284314#file-homecontroller-cs&quot;&gt;HomeController.cs&lt;/a&gt; should look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class HomeController : Controller
+{
+    public ActionResult Index()
+    {
+        return View();
+    }
+    public ActionResult Upload()
+    {
+        var file  = Request.Files[&quot;Filedata&quot;];
+        string savePath = Server.MapPath(@&quot;~\Content\&quot; + file.FileName);
+        file.SaveAs(savePath);
+
+        return Content(Url.Content(@&quot;~\Content\&quot; + file.FileName));
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; : Uploadify names the file it sends as ‘Filedata’.&lt;/p&gt;
+
+&lt;p&gt;For the view &lt;a href=&quot;https://gist.github.com/gideondsouza/4284335&quot;&gt;Index.cshtml&lt;/a&gt; should look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@{
+    Layout = null;
+}
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;viewport&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width=device-width&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;::Uploadify Example::&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://code.jquery.com/jquery-1.7.2.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@Url.Content(&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;~/&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Scripts&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jquery&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;uploadify-3&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;)&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/css&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@Url.Content(&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;~/&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Content&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;uploadify&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;css&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;)&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;#file_upload&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uploadify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&#39;swf&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@Url.Content(&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/Content/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uploadify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;swf&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;//this is where the file posts when it uploads.&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&#39;uploader&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@Url.Action(&quot;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Upload&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;, &quot;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Home&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&#39;onUploadSuccess&#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                  &lt;span class=&quot;c1&quot;&gt;//data is whatever you return from the server&lt;/span&gt;
+                  &lt;span class=&quot;c1&quot;&gt;//we&#39;re sending the URL from the server so we append this as an image to the #uploaded div&lt;/span&gt;
+                           &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#uploaded&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;img src=&#39;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&#39; alt=&#39;Uploaded Image&#39; /&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+        Click Select files to upload files.
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file_upload&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file_upload&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;uploaded&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Note : I had to change the css in uploadify.css, line 74 to point to the uploadify-cancel.png correctly.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;74:   background: url(&#39;../Content/uploadify-cancel.png&#39;) 0 0 no-repeat;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://www.gideondsouza.com/blog/uploading-multiple-images-with-ruby-and-sinatra-and-uploadify/&quot;&gt;same article for doing this with Ruby :)&lt;/a&gt;
+&lt;!-- And that&#39;s it!!! I have a full sample you can [download here][6]. --&gt;&lt;/p&gt;
+
 </content>
 	</entry>
 
