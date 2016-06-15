@@ -7,7 +7,7 @@
 	<author>
 		<name>Gideon Dsouza</name>
 	</author>
-	<updated>2016-06-15T13:15:19+05:30</updated>
+	<updated>2016-06-15T20:51:04+05:30</updated>
 
 	<entry>
 		<title type="text">Uploading multiple images with Ruby, Sinatra and Uploadify.</title>
@@ -393,7 +393,7 @@ Your &lt;a href=&quot;https://gist.github.com/gideondsouza/4284314#file-homecont
 
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; : Uploadify names the file it sends as ‘Filedata’.&lt;/p&gt;
 
-&lt;p&gt;For the view &lt;a href=&quot;https://gist.github.com/gideondsouza/4284335&quot;&gt;Index.cshtml&lt;/a&gt; should look like this:&lt;/p&gt;
+&lt;p&gt;For the view &lt;a href=&quot;https://gist.github.com/gideondsouza/4284335&quot;&gt;Index.cshtml&lt;/a&gt; should look like the following. Put your js files from the uploadify.zip into &lt;code class=&quot;highlighter-rouge&quot;&gt;/Scripts&lt;/code&gt; and pngs and css into &lt;code class=&quot;highlighter-rouge&quot;&gt;/Content&lt;/code&gt; in your asp.net-mvc project :&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@{
     Layout = null;
