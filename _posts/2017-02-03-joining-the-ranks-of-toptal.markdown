@@ -15,6 +15,6 @@ Open source also provides for an amazing opportunity to showcase skill and work 
 
 Recently I noticed online freelance portals provide something of a win-win. The money and business is organized and not something you worry about, and you have the freedom and independence of a freelancer.
 
-I'm giving Toptal a chance and I'll see how it all goes. So far their questionnaire seems quite interesting, they seem to be looking out for the nerds and that makes me happy.
+I'm giving [Toptal](https://www.toptal.com/web)  a chance and will see how it all goes. So far their questionnaire seems quite interesting, they seem to be looking out for the nerds and that makes me happy.
 
 I'll keep you updated.
