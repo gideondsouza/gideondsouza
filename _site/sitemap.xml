@@ -3,20 +3,20 @@
 
 	<!-- Pages -->
 	<url>
-		<loc></loc>
-		<lastmod>2016-06-15T20:51:04+05:30</lastmod>
+		<loc>http://localhost:4000</loc>
+		<lastmod>2017-02-03T13:38:22+05:30</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
 	<url>
-		<loc>/blog/</loc>
-		<lastmod>2016-06-15T20:51:04+05:30</lastmod>
+		<loc>http://localhost:4000/blog/</loc>
+		<lastmod>2017-02-03T13:38:22+05:30</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
 	<url>
-		<loc>/about/</loc>
-		<lastmod>2016-06-15T20:51:04+05:30</lastmod>
+		<loc>http://localhost:4000/about/</loc>
+		<lastmod>2017-02-03T13:38:22+05:30</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
@@ -24,70 +24,70 @@
 	<!-- Posts -->
 	
 	<url>
-		<loc>/blog/uploading-multiple-images-with-ruby-and-sinatra-and-uploadify/</loc>
+		<loc>http://localhost:4000/blog/joining-the-ranks-of-toptal/</loc>
+		<lastmod>2017-02-03</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.9</priority>
+	</url>
+	
+	<url>
+		<loc>http://localhost:4000/blog/uploading-multiple-images-with-ruby-and-sinatra-and-uploadify/</loc>
 		<lastmod>2016-05-31</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.9</priority>
 	</url>
 	
 	<url>
-		<loc>/blog/uploading-images-with-ruby-and-sinatra/</loc>
+		<loc>http://localhost:4000/blog/uploading-images-with-ruby-and-sinatra/</loc>
 		<lastmod>2016-05-31</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.9</priority>
 	</url>
 	
 	<url>
-		<loc>/blog/how-to-authenticate-with-oauth-in-perl/</loc>
+		<loc>http://localhost:4000/blog/how-to-authenticate-with-oauth-in-perl/</loc>
 		<lastmod>2016-05-26</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.9</priority>
 	</url>
 	
 	<url>
-		<loc>/blog/why-python-comprehensions-are-the-best-thing-since-sliced-bread/</loc>
+		<loc>http://localhost:4000/blog/why-python-comprehensions-are-the-best-thing-since-sliced-bread/</loc>
 		<lastmod>2016-05-24</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.9</priority>
 	</url>
 	
 	<url>
-		<loc>/blog/the-big-migration-to-jekyll/</loc>
+		<loc>http://localhost:4000/blog/the-big-migration-to-jekyll/</loc>
 		<lastmod>2016-05-21</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.9</priority>
 	</url>
 	
 	<url>
-		<loc>/blog/ajax-upload-files-with-asp.net-mvc-and-uploadify/</loc>
-		<lastmod>2014-12-04</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.9</priority>
-	</url>
-	
-	<url>
-		<loc>/blog/the-dawn-of-the-micro-web-frameworks-introducing-dancer/</loc>
+		<loc>http://localhost:4000/blog/the-dawn-of-the-micro-web-frameworks-introducing-dancer/</loc>
 		<lastmod>2013-09-10</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.9</priority>
 	</url>
 	
 	<url>
-		<loc>/blog/solutions-to-sqlzoo.net-more-join-operation-questions-movie-database/</loc>
+		<loc>http://localhost:4000/blog/solutions-to-sqlzoo.net-more-join-operation-questions-movie-database/</loc>
 		<lastmod>2013-01-01</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.9</priority>
 	</url>
 	
 	<url>
-		<loc>/blog/scanning-multiple-documents-with-wia-2.0-adf-scanner/</loc>
+		<loc>http://localhost:4000/blog/scanning-multiple-documents-with-wia-2.0-adf-scanner/</loc>
 		<lastmod>2012-12-29</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.9</priority>
 	</url>
 	
 	<url>
-		<loc>/blog/how-to-get-the-current-location-address-and-send-it-to-a-server-on-android/</loc>
+		<loc>http://localhost:4000/blog/how-to-get-the-current-location-address-and-send-it-to-a-server-on-android/</loc>
 		<lastmod>2012-06-03</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.9</priority>

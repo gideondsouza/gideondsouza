@@ -1,18 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 	<title>Coded with &lt;3</title>
-	<link href="/blog/feed.atom" rel="self" />
-	<link href="/" />
-	<id>/</id>
+	<link href="http://localhost:4000/blog/feed.atom" rel="self" />
+	<link href="http://localhost:4000/" />
+	<id>http://localhost:4000/</id>
 	<author>
 		<name>Gideon Dsouza</name>
 	</author>
-	<updated>2016-06-15T20:51:04+05:30</updated>
+	<updated>2017-02-03T13:38:22+05:30</updated>
+
+	<entry>
+		<title type="text">Joining the ranks of Toptal</title>
+		<link href="http://localhost:4000/blog/joining-the-ranks-of-toptal/" />
+		<id>http://localhost:4000/blog/joining-the-ranks-of-toptal/</id>
+		<published>2017-02-03T00:00:00+05:30</published>
+		<updated>2017-02-03T00:00:00+05:30</updated>
+		<summary type="html">So I’ve spent a whole lot of my life programming. Been at it since I was 11. I’m 26 so that’s more than half my life.
+
+</summary>
+		<content type="html">&lt;p&gt;So I’ve spent a whole lot of my life programming. Been at it since I was 11. I’m 26 so that’s more than half my life.&lt;/p&gt;
+
+&lt;p&gt;I’ve worked both as a freelancer and in a 9-5 jobs. My current job is where I’ve been for 5 years now.&lt;/p&gt;
+
+&lt;p&gt;I’ve found out over the time I’ve spent programming that it’s a whole large field out there that moves&lt;br /&gt;
+ridiculously fast. As a programmer you need to keep updated with what’s out there by diving into new things. A freelancing position gives you the opportunity to do this but a 9-5 job might not.&lt;/p&gt;
+
+&lt;p&gt;Open source provides for an amazing opportunity to showcase skill and work with others, but I’ve also got bills to pay?&lt;/p&gt;
+
+&lt;p&gt;Recently I noticed online freelance portals provide something of a win-win. Is gives you money, some independence and the ability to work with what you want.&lt;/p&gt;
+
+&lt;p&gt;I’m giving Toptal a chance and I’ll see how it all goes. So far their questionnaire seems quite interesting, they seem to be looking out for the nerd and that makes me happy.&lt;/p&gt;
+
+&lt;p&gt;I’ll keep you updated.&lt;/p&gt;
+</content>
+	</entry>
 
 	<entry>
 		<title type="text">Uploading multiple images with Ruby, Sinatra and Uploadify.</title>
-		<link href="/blog/uploading-multiple-images-with-ruby-and-sinatra-and-uploadify/" />
-		<id>/blog/uploading-multiple-images-with-ruby-and-sinatra-and-uploadify/</id>
+		<link href="http://localhost:4000/blog/uploading-multiple-images-with-ruby-and-sinatra-and-uploadify/" />
+		<id>http://localhost:4000/blog/uploading-multiple-images-with-ruby-and-sinatra-and-uploadify/</id>
 		<published>2016-05-31T00:00:00+05:30</published>
 		<updated>2016-05-31T00:00:00+05:30</updated>
 		<summary type="html">This is the finished product:
@@ -69,18 +95,18 @@
 &lt;!-- &lt;script src=&quot;https://gist.github.com/gideondsouza/59f1d9ccb2551d0c06e8c47351a063f8.js&quot;&gt;&lt;/script&gt; --&gt;
 &lt;p&gt;&lt;a href=&quot;https://gist.github.com/gideondsouza/59f1d9ccb2551d0c06e8c47351a063f8&quot;&gt;img_mgr.rb&lt;/a&gt; :&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;require &#39;sinatra&#39;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;require 'sinatra'
 
-get &#39;/&#39; do
+get '/' do
   erb :form_multiple
 end
 
-post &#39;/upload&#39; do
+post '/upload' do
 #this method will get as ajax call for every file uploaded
   @filename = params[:Filename]
   file = params[:Filedata][:tempfile]
 
-  File.open(&quot;./public/#{@filename}&quot;, &#39;wb&#39;) do |f|
+  File.open(&quot;./public/#{@filename}&quot;, 'wb') do |f|
     f.write(file.read)
   end
 
@@ -111,11 +137,11 @@ end
         &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file_upload&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file_upload&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
         &lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
         &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;#file_upload&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uploadify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-              &lt;span class=&quot;s1&quot;&gt;&#39;swf&#39;&lt;/span&gt;      &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;uploadify.swf&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-              &lt;span class=&quot;s1&quot;&gt;&#39;uploader&#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;/upload&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-              &lt;span class=&quot;s1&quot;&gt;&#39;onUploadSuccess&#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                  &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#images&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;img src=&#39;/&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&#39; height=&#39;100px&#39;/&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'#file_upload'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uploadify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+              &lt;span class=&quot;s1&quot;&gt;'swf'&lt;/span&gt;      &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'uploadify.swf'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;s1&quot;&gt;'uploader'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/upload'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;s1&quot;&gt;'onUploadSuccess'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                  &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#images&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;img src='/&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;' height='100px'/&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
               &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
@@ -144,8 +170,8 @@ end
 
 	<entry>
 		<title type="text">Uploading images with Ruby and Sinatra</title>
-		<link href="/blog/uploading-images-with-ruby-and-sinatra/" />
-		<id>/blog/uploading-images-with-ruby-and-sinatra/</id>
+		<link href="http://localhost:4000/blog/uploading-images-with-ruby-and-sinatra/" />
+		<id>http://localhost:4000/blog/uploading-images-with-ruby-and-sinatra/</id>
 		<published>2016-05-31T00:00:00+05:30</published>
 		<updated>2016-05-31T00:00:00+05:30</updated>
 		<summary type="html">So if you may have noticed, I have a thing for micro frameworks.
@@ -203,8 +229,8 @@ end
 
 	<entry>
 		<title type="text">How to authenticate with oauth in perl (Dancer, GitHub, LWP::UserAgent)</title>
-		<link href="/blog/how-to-authenticate-with-oauth-in-perl/" />
-		<id>/blog/how-to-authenticate-with-oauth-in-perl/</id>
+		<link href="http://localhost:4000/blog/how-to-authenticate-with-oauth-in-perl/" />
+		<id>http://localhost:4000/blog/how-to-authenticate-with-oauth-in-perl/</id>
 		<published>2016-05-26T00:00:00+05:30</published>
 		<updated>2016-05-26T00:00:00+05:30</updated>
 		<summary type="html">I’ve been playing with perl a lot lately and after recently playing with Catalyst, I moved on to Dancer.
@@ -262,8 +288,8 @@ end
 
 	<entry>
 		<title type="text">Why python comprehensions are the best thing since sliced bread</title>
-		<link href="/blog/why-python-comprehensions-are-the-best-thing-since-sliced-bread/" />
-		<id>/blog/why-python-comprehensions-are-the-best-thing-since-sliced-bread/</id>
+		<link href="http://localhost:4000/blog/why-python-comprehensions-are-the-best-thing-since-sliced-bread/" />
+		<id>http://localhost:4000/blog/why-python-comprehensions-are-the-best-thing-since-sliced-bread/</id>
 		<published>2016-05-24T00:00:00+05:30</published>
 		<updated>2016-05-24T00:00:00+05:30</updated>
 		<summary type="html">Ever since I’ve picked up Perl and Python in my free time, I strongly believe in what Bjarne Stroustrup says here : “Nobody should call themselves a professional if they only know one language. Five is a good number.”
@@ -309,8 +335,8 @@ end
 
 	<entry>
 		<title type="text">The Big migration to Jekyll</title>
-		<link href="/blog/the-big-migration-to-jekyll/" />
-		<id>/blog/the-big-migration-to-jekyll/</id>
+		<link href="http://localhost:4000/blog/the-big-migration-to-jekyll/" />
+		<id>http://localhost:4000/blog/the-big-migration-to-jekyll/</id>
 		<published>2016-05-21T00:00:00+05:30</published>
 		<updated>2016-05-21T00:00:00+05:30</updated>
 		<summary type="html">So finally after all the obsession, reading and nail-biting I made the long awaited move to Jekyll; a static blog aware site generator.
@@ -339,116 +365,9 @@ The theme usually will usually be site you see, and you’ll have to hack your w
 	</entry>
 
 	<entry>
-		<title type="text">ajax upload files with asp.net-mvc and uploadify</title>
-		<link href="/blog/ajax-upload-files-with-asp.net-mvc-and-uploadify/" />
-		<id>/blog/ajax-upload-files-with-asp.net-mvc-and-uploadify/</id>
-		<published>2014-12-04T00:00:00+05:30</published>
-		<updated>2014-12-04T00:00:00+05:30</updated>
-		<summary type="html">After answering a question on stackoverflow I realized uploading files with ajax was something everyone was looking for.
-
-</summary>
-		<content type="html">&lt;p&gt;After answering a question on stackoverflow I realized uploading files with ajax was something everyone was looking for.&lt;/p&gt;
-
-&lt;p&gt;So to commemorate the &lt;a href=&quot;http://stackoverflow.com/badges/310/asp-net-mvc?userid=368070&quot;&gt;asp.net-mvc badge&lt;/a&gt; I won recently I’m writing a full example of how to do this with asp.net-mvc.&lt;/p&gt;
-
-&lt;p&gt;I’ll use the &lt;a href=&quot;http://www.uploadify.com&quot;&gt;uploadify jquery plugin&lt;/a&gt;. There are &lt;a href=&quot;http://www.webdeveloperjuice.com/2010/02/13/7-trusted-ajax-file-upload-plugins-using-jquery/&quot;&gt;many others&lt;/a&gt; you can use too.&lt;/p&gt;
-
-&lt;p&gt;So all in all it’s pretty simple. We’ll create something that looks like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/Hm2R6sw.png&quot; alt=&quot;Asp.net-mvc Ajax Upload screenshot&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;It allows you to select multiple files, uploads them asynchronously. Then appends a link to the file, assuming it’s an image.&lt;/p&gt;
-
-&lt;p&gt;I uploaded a picture of my &lt;a href=&quot;https://www.sparkfun.com/products/9284&quot;&gt;Arduino Starter Kit&lt;/a&gt; :)&lt;/p&gt;
-
-&lt;h2 id=&quot;how-to-&quot;&gt;How to :&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Create a new asp.net mvc4 web application.&lt;/li&gt;
-  &lt;li&gt;Delete the &lt;code class=&quot;highlighter-rouge&quot;&gt;Index.cshtml&lt;/code&gt; page under &lt;code class=&quot;highlighter-rouge&quot;&gt;\View\Home\&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Open &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.cs&lt;/code&gt; and Right Click the &lt;code class=&quot;highlighter-rouge&quot;&gt;Index()&lt;/code&gt; method.&lt;/li&gt;
-  &lt;li&gt;Click Add View, and uncheck &lt;em&gt;Use a Layout or Master Page&lt;/em&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Create an upload method like the following code snippet.
-Your &lt;a href=&quot;https://gist.github.com/gideondsouza/4284314#file-homecontroller-cs&quot;&gt;HomeController.cs&lt;/a&gt; should look like this:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class HomeController : Controller
-{
-    public ActionResult Index()
-    {
-        return View();
-    }
-    public ActionResult Upload()
-    {
-        var file  = Request.Files[&quot;Filedata&quot;];
-        string savePath = Server.MapPath(@&quot;~\Content\&quot; + file.FileName);
-        file.SaveAs(savePath);
-
-        return Content(Url.Content(@&quot;~\Content\&quot; + file.FileName));
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; : Uploadify names the file it sends as ‘Filedata’.&lt;/p&gt;
-
-&lt;p&gt;For the view &lt;a href=&quot;https://gist.github.com/gideondsouza/4284335&quot;&gt;Index.cshtml&lt;/a&gt; should look like the following. Put your js files from the uploadify.zip into &lt;code class=&quot;highlighter-rouge&quot;&gt;/Scripts&lt;/code&gt; and pngs and css into &lt;code class=&quot;highlighter-rouge&quot;&gt;/Content&lt;/code&gt; in your asp.net-mvc project :&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@{
-    Layout = null;
-}
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;viewport&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width=device-width&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;::Uploadify Example::&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://code.jquery.com/jquery-1.7.2.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@Url.Content(&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;~/&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Scripts&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jquery&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;uploadify-3&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;)&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/css&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@Url.Content(&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;~/&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Content&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;uploadify&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;css&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;)&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;#file_upload&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uploadify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&#39;swf&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@Url.Content(&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/Content/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uploadify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;swf&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;c1&quot;&gt;//this is where the file posts when it uploads.&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&#39;uploader&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@Url.Action(&quot;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Upload&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;, &quot;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Home&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&#39;onUploadSuccess&#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                  &lt;span class=&quot;c1&quot;&gt;//data is whatever you return from the server&lt;/span&gt;
-                  &lt;span class=&quot;c1&quot;&gt;//we&#39;re sending the URL from the server so we append this as an image to the #uploaded div&lt;/span&gt;
-                           &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#uploaded&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;img src=&#39;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&#39; alt=&#39;Uploaded Image&#39; /&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
-        Click Select files to upload files.
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file_upload&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file_upload&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;uploaded&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Note : I had to change the css in uploadify.css, line 74 to point to the uploadify-cancel.png correctly.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;74:   background: url(&#39;../Content/uploadify-cancel.png&#39;) 0 0 no-repeat;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Check out the &lt;a href=&quot;http://www.gideondsouza.com/blog/uploading-multiple-images-with-ruby-and-sinatra-and-uploadify/&quot;&gt;same article for doing this with Ruby :)&lt;/a&gt;
-&lt;!-- And that&#39;s it!!! I have a full sample you can [download here][6]. --&gt;&lt;/p&gt;
-
-</content>
-	</entry>
-
-	<entry>
 		<title type="text">The dawn of the micro web frameworks, introducing dancer</title>
-		<link href="/blog/the-dawn-of-the-micro-web-frameworks-introducing-dancer/" />
-		<id>/blog/the-dawn-of-the-micro-web-frameworks-introducing-dancer/</id>
+		<link href="http://localhost:4000/blog/the-dawn-of-the-micro-web-frameworks-introducing-dancer/" />
+		<id>http://localhost:4000/blog/the-dawn-of-the-micro-web-frameworks-introducing-dancer/</id>
 		<published>2013-09-10T00:00:00+05:30</published>
 		<updated>2013-09-10T00:00:00+05:30</updated>
 		<summary type="html">Turns out micro-frameworks are really in these days, there is:
@@ -481,7 +400,7 @@ Hello world!
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;If you know enough web development you probably get it. This line &lt;code class=&quot;highlighter-rouge&quot;&gt;get &#39;/&#39; =&amp;gt; sub {}&lt;/code&gt; registers the url : / with a subroutine, or more correctly a coderef (a reference to a subroutine)&lt;/p&gt;
+&lt;p&gt;If you know enough web development you probably get it. This line &lt;code class=&quot;highlighter-rouge&quot;&gt;get '/' =&amp;gt; sub {}&lt;/code&gt; registers the url : / with a subroutine, or more correctly a coderef (a reference to a subroutine)&lt;/p&gt;
 
 &lt;p&gt;That means the homepage (like www.example.com/) will show “Hello world” in the browser.  (In perl the last statement in sub will be the return value)&lt;/p&gt;
 
@@ -503,11 +422,11 @@ Hello world!
 
 	<entry>
 		<title type="text">Solutions to sqlzoo.net More Join Operation Questions (Movie Database)</title>
-		<link href="/blog/solutions-to-sqlzoo.net-more-join-operation-questions-movie-database/" />
-		<id>/blog/solutions-to-sqlzoo.net-more-join-operation-questions-movie-database/</id>
+		<link href="http://localhost:4000/blog/solutions-to-sqlzoo.net-more-join-operation-questions-movie-database/" />
+		<id>http://localhost:4000/blog/solutions-to-sqlzoo.net-more-join-operation-questions-movie-database/</id>
 		<published>2013-01-01T00:00:00+05:30</published>
 		<updated>2013-01-01T00:00:00+05:30</updated>
-		<summary type="html">While meandering around the web for sql exercises and tutorials I came across [www.sqlzoo.net][1].
+		<summary type="html">While meandering around the web for sql exercises and tutorials I came across www.sqlzoo.net.
 
 </summary>
 		<content type="html">&lt;p&gt;While meandering around the web for sql exercises and tutorials I came across &lt;a href=&quot;http://www.sqlzoo.net&quot;&gt;www.sqlzoo.net&lt;/a&gt;.&lt;/p&gt;
@@ -545,7 +464,7 @@ Hello world!
 &lt;script src=&quot;https://gist.github.com/3551479.js&quot;&gt; &lt;/script&gt;
 
 &lt;hr /&gt;
-&lt;p&gt;## Real join questions begin :&lt;/p&gt;
+&lt;h2 id=&quot;real-join-questions-begin-&quot;&gt;Real join questions begin :&lt;/h2&gt;
 
 &lt;h3 id=&quot;problem-7--obtain-the-cast-list-for-casablanca-use-the-id-value-that-you-obtained-in-the-previous-question&quot;&gt;Problem 7 : Obtain the cast list for ‘Casablanca’. Use the id value that you obtained in the previous question.&lt;/h3&gt;
 
@@ -570,7 +489,7 @@ Hello world!
 &lt;hr /&gt;
 
 &lt;h2 id=&quot;hard-questions&quot;&gt;Hard Questions.&lt;/h2&gt;
-&lt;p&gt;### These questions are a little bit hard. Give some time to crack them before looking at the solutions.&lt;/p&gt;
+&lt;h3 id=&quot;these-questions-are-a-little-bit-hard-give-some-time-to-crack-them-before-looking-at-the-solutions&quot;&gt;These questions are a little bit hard. Give some time to crack them before looking at the solutions.&lt;/h3&gt;
 
 &lt;h3 id=&quot;problem-12--which-were-the-busiest-years-for-john-travolta-show-the-number-of-movies-he-made-for-each-year&quot;&gt;Problem 12 : Which were the busiest years for ‘John Travolta’. Show the number of movies he made for each year.&lt;/h3&gt;
 
@@ -599,8 +518,8 @@ Hello world!
 
 	<entry>
 		<title type="text">Scanning multiple documents with WIA 2.0 (ADF Scanner)</title>
-		<link href="/blog/scanning-multiple-documents-with-wia-2.0-adf-scanner/" />
-		<id>/blog/scanning-multiple-documents-with-wia-2.0-adf-scanner/</id>
+		<link href="http://localhost:4000/blog/scanning-multiple-documents-with-wia-2.0-adf-scanner/" />
+		<id>http://localhost:4000/blog/scanning-multiple-documents-with-wia-2.0-adf-scanner/</id>
 		<published>2012-12-29T00:00:00+05:30</published>
 		<updated>2012-12-29T00:00:00+05:30</updated>
 		<summary type="html">So a long time ago I had to do a project that involved getting images from a scanner with an auto document feeder. It was a challenge doing this with WIA (Windows Imaging Aquisation) but I found some code somewhere online and made it into a nice library.
@@ -624,8 +543,8 @@ Hello world!
 
 	<entry>
 		<title type="text">How to get the current location, address and send it to a server on android</title>
-		<link href="/blog/how-to-get-the-current-location-address-and-send-it-to-a-server-on-android/" />
-		<id>/blog/how-to-get-the-current-location-address-and-send-it-to-a-server-on-android/</id>
+		<link href="http://localhost:4000/blog/how-to-get-the-current-location-address-and-send-it-to-a-server-on-android/" />
+		<id>http://localhost:4000/blog/how-to-get-the-current-location-address-and-send-it-to-a-server-on-android/</id>
 		<published>2012-06-03T00:00:00+05:30</published>
 		<updated>2012-06-03T00:00:00+05:30</updated>
 		<summary type="html">Location, Location, Location! Well this article isn’t all about location.
