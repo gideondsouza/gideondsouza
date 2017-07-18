@@ -7,33 +7,7 @@
 	<author>
 		<name>Gideon Dsouza</name>
 	</author>
-	<updated>2017-02-03T13:38:22+05:30</updated>
-
-	<entry>
-		<title type="text">Joining the ranks of Toptal</title>
-		<link href="http://localhost:4000/blog/joining-the-ranks-of-toptal/" />
-		<id>http://localhost:4000/blog/joining-the-ranks-of-toptal/</id>
-		<published>2017-02-03T00:00:00+05:30</published>
-		<updated>2017-02-03T00:00:00+05:30</updated>
-		<summary type="html">So I’ve spent a whole lot of my life programming. Been at it since I was 11. I’m 26 so that’s more than half my life.
-
-</summary>
-		<content type="html">&lt;p&gt;So I’ve spent a whole lot of my life programming. Been at it since I was 11. I’m 26 so that’s more than half my life.&lt;/p&gt;
-
-&lt;p&gt;I’ve worked both as a freelancer and in a 9-5 jobs. My current job is where I’ve been for 5 years now.&lt;/p&gt;
-
-&lt;p&gt;I’ve found out over the time I’ve spent programming that it’s a whole large field out there that moves&lt;br /&gt;
-ridiculously fast. As a programmer you need to keep updated with what’s out there by diving into new things. A freelancing position gives you the opportunity to do this but a 9-5 job might not.&lt;/p&gt;
-
-&lt;p&gt;Open source provides for an amazing opportunity to showcase skill and work with others, but I’ve also got bills to pay?&lt;/p&gt;
-
-&lt;p&gt;Recently I noticed online freelance portals provide something of a win-win. Is gives you money, some independence and the ability to work with what you want.&lt;/p&gt;
-
-&lt;p&gt;I’m giving Toptal a chance and I’ll see how it all goes. So far their questionnaire seems quite interesting, they seem to be looking out for the nerd and that makes me happy.&lt;/p&gt;
-
-&lt;p&gt;I’ll keep you updated.&lt;/p&gt;
-</content>
-	</entry>
+	<updated>2017-07-18T22:48:04+05:30</updated>
 
 	<entry>
 		<title type="text">Uploading multiple images with Ruby, Sinatra and Uploadify.</title>
