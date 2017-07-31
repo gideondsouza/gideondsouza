@@ -7,7 +7,7 @@
 	<author>
 		<name>Gideon Dsouza</name>
 	</author>
-	<updated>2017-07-18T22:48:04+05:30</updated>
+	<updated>2017-07-31T14:46:09+05:30</updated>
 
 	<entry>
 		<title type="text">Uploading multiple images with Ruby, Sinatra and Uploadify.</title>
@@ -31,13 +31,8 @@
 &lt;p&gt;&lt;strong&gt;Setup&lt;/strong&gt; :&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Install shotgun so you don’t have to reload your Sinatra app everytime you change/debug&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  $ gem install shotgun
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
+  &lt;li&gt;Install shotgun so you don’t have to reload your Sinatra app everytime you change/debug
+      $ gem install shotgun&lt;/li&gt;
   &lt;li&gt;Download the free uploadify plugin : &lt;a href=&quot;http://www.uploadify.com/download/&quot;&gt;http://www.uploadify.com/download/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Extract the uploadify zip into a &lt;em&gt;/public&lt;/em&gt; folder. Inside it put an &lt;em&gt;/img&lt;/em&gt; folder, uplodify expects the cancel button image to come out of here.&lt;/li&gt;
 &lt;/ul&gt;
@@ -90,7 +85,7 @@ end
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;The home page route &lt;em&gt;’/’&lt;/em&gt; serves the &lt;em&gt;form_multiple.erb&lt;/em&gt; file. This will use uploadify to set itself up. It will make requests to the &lt;em&gt;‘/upload’&lt;/em&gt; route. In here we get the filename from &lt;em&gt;params[:Filename]&lt;/em&gt; and the file object from &lt;em&gt;file = params[:Filedata][:tempfile]&lt;/em&gt;. If you want to know how I figured this out, I simple wrote in &lt;em&gt;puts params&lt;/em&gt;. This gets printed into the console and you can check out the object yourself then. I write the file into the &lt;em&gt;/public&lt;/em&gt; folder. It can be served them from the root of the wherever this is hosted.&lt;/p&gt;
+&lt;p&gt;The home page route &lt;em&gt;’/’&lt;/em&gt; serves the &lt;em&gt;form_multiple.erb&lt;/em&gt; file. This will use uploadify to set itself up. It will make requests to the &lt;em&gt;‘/upload’&lt;/em&gt; route. In here we get the filename from &lt;em&gt;params[:Filename]&lt;/em&gt; and the file object from &lt;em&gt;file = params[:Filedata][:tempfile]&lt;/em&gt;. (If you want to know how I figured this out, I simple wrote “&lt;em&gt;puts params&lt;/em&gt;” in the route, the params object then gets printed into the console and you can check out the object yourself then). I write the file into the &lt;em&gt;/public&lt;/em&gt; folder. It can be served then from the root of the wherever this is hosted.&lt;/p&gt;
 
 &lt;p&gt;The view looks like this:&lt;/p&gt;
 
@@ -347,7 +342,7 @@ The theme usually will usually be site you see, and you’ll have to hack your w
 		<summary type="html">Turns out micro-frameworks are really in these days, there is:
 
 </summary>
-		<content type="html">&lt;p&gt;Turns out micro-frameworks are really in these days, there is:&lt;/p&gt;
+		<content type="html">&lt;p&gt;Turns out micro-frameworks are really &lt;em&gt;&lt;strong&gt;in&lt;/strong&gt;&lt;/em&gt; these days, there is:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.sinatrarb.com/&quot;&gt;Sinatra&lt;/a&gt; for Ruby (This is grand daddy that inspired everyone else)&lt;/li&gt;
@@ -521,12 +516,10 @@ Hello world!
 		<id>http://localhost:4000/blog/how-to-get-the-current-location-address-and-send-it-to-a-server-on-android/</id>
 		<published>2012-06-03T00:00:00+05:30</published>
 		<updated>2012-06-03T00:00:00+05:30</updated>
-		<summary type="html">Location, Location, Location! Well this article isn’t all about location.
+		<summary type="html">Location services especially on mobile platforms have now become the norm these days. So I’m going to cover the following in the this article:
 
 </summary>
-		<content type="html">&lt;p&gt;Location, Location, Location! Well this article isn’t all about location.&lt;/p&gt;
-
-&lt;p&gt;Things I will cover in this article:&lt;/p&gt;
+		<content type="html">&lt;p&gt;Location services especially on mobile platforms have now become the norm these days. So I’m going to cover the following in the this article:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Get the location of the users device (via the NETWORK). This will be latitude and longitude.&lt;/li&gt;

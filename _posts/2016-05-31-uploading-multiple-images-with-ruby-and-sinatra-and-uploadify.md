@@ -20,7 +20,6 @@ It's a flash/jquery based plugin. I've used it in ancient times. Yes you may sti
 **Setup** :
 
 * Install shotgun so you don't have to reload your Sinatra app everytime you change/debug
-
         $ gem install shotgun
 * Download the free uploadify plugin : [http://www.uploadify.com/download/](http://www.uploadify.com/download/)
 * Extract the uploadify zip into a _/public_ folder. Inside it put an _/img_ folder, uplodify expects the cancel button image to come out of here.
@@ -69,7 +68,7 @@ Here is our sinatra app:
       return @filename
     end
 
-The home page route _'/'_ serves the _form_multiple.erb_ file. This will use uploadify to set itself up. It will make requests to the _'/upload'_ route. In here we get the filename from _params[:Filename]_ and the file object from _file = params[:Filedata][:tempfile]_. If you want to know how I figured this out, I simple wrote in _puts params_. This gets printed into the console and you can check out the object yourself then. I write the file into the _/public_ folder. It can be served them from the root of the wherever this is hosted.
+The home page route _'/'_ serves the _form_multiple.erb_ file. This will use uploadify to set itself up. It will make requests to the _'/upload'_ route. In here we get the filename from _params[:Filename]_ and the file object from _file = params[:Filedata][:tempfile]_. (If you want to know how I figured this out, I simple wrote "_puts params_" in the route, the params object then gets printed into the console and you can check out the object yourself then). I write the file into the _/public_ folder. It can be served then from the root of the wherever this is hosted.
 
 The view looks like this:
 

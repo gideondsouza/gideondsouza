@@ -7,7 +7,7 @@ tags:
 - dancer
 ---
 
-Turns out micro-frameworks are really in these days, there is:
+Turns out micro-frameworks are really _**in**_ these days, there is:
 
 * [Sinatra](http://www.sinatrarb.com/) for Ruby (This is grand daddy that inspired everyone else)
 * [Dancer](http://www.perldancer.org/) for Perl

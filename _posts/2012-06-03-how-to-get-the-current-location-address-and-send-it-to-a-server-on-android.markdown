@@ -7,9 +7,7 @@ tags:
 - java
 ---
 
-Location, Location, Location! Well this article isn't all about location.
-
-Things I will cover in this article:
+Location services especially on mobile platforms have now become the norm these days. So I'm going to cover the following in the this article:
 
 1. Get the location of the users device (via the NETWORK). This will be latitude and longitude.
 2. Reverse-Geo code information from the first step and get an address
@@ -39,7 +37,7 @@ The first button gets my location and the code is below. This is pretty straight
 To get a location from the GPS you would just change this line:
 
     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-
+   
 To:
 
     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
