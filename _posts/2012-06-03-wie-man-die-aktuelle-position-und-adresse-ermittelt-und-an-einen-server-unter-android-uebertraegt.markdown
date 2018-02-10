@@ -58,7 +58,30 @@ Now typically when you get this far, you want to send this information off to yo
 
 No doubt you need the INTERNET permission as I described earlier. The code looks like this:
 
-<script src="https://gist.github.com/2864460.js"> </script>
+	public String GetAddress(String lat, String lon)
+	{
+		Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
+		String ret = "";
+		try {
+			List<Address> addresses = geocoder.getFromLocation(Double.parseDouble(lat), Double.parseDouble(lon), 1);
+			if(addresses != null) {
+				Address returnedAddress = addresses.get(0);
+				StringBuilder strReturnedAddress = new StringBuilder("Address:\n");
+				for(int i=0; i<returnedAddress.getMaxAddressLineIndex(); i++) {
+					strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
+				}
+				ret = strReturnedAddress.toString();
+			}
+			else{
+				ret = "No Address returned!";
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ret = "Can't get Address!";
+		}
+		return ret;
+}
 
 And there you have it!
 
