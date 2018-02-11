@@ -34,7 +34,7 @@ Der erste Knopf gibt mir meinen Standort zurück, den entsprechendnen Code dazu 
 
 <script src="https://gist.github.com/2864370.js"> </script>
 
-Um eine Ortung über das GPS zu ermitteln muss nur dieser Ausdruck (line) geändet werden. Diese line:
+Um eine Ortung über das GPS zu ermitteln muss nur dieser Ausdruck (line) geändet werden. Dieser Ausdruck:
 
     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
    
