@@ -17,7 +17,7 @@ So all in all it's pretty simple. We'll create something that looks like this:
 
 ![Asp.net-mvc Ajax Upload screenshot][4]
 
-It allows you to select multiple files, uploads them asynchronously. Then appends a link to the file, assuming it's an image.
+It allows you to (1) select multiple files, (2)uploads these files asynchronouslyto your aspnetmvc app and finally(3) appends a link to the file, assuming it's an image.
 
 I uploaded a picture of my [Arduino Starter Kit][5] :)
 
