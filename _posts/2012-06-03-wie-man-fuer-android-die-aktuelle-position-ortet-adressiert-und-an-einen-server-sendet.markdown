@@ -11,7 +11,7 @@ Ortungsdienste sind vor allem für mobile Plattformen zur Norm geworden. In dies
 
 1. Ortung des Endbenutzer-Gerätes (users device) über das Netzwerk, also mittels der Ermittlung von Latitude und Longitude.
 2. Umkehrung der Geokodeinformation aus Schritt 1. und darüber die Ermittlung der Adresse
-3. Senden mittels Http Get. an einen Server (Das ist ja typischer Weise was man mit der ermittelten Ortung anstellen möchte ;) )
+3. Senden mittels Http Get an einen Server (Das ist ja typischer Weise was man mit der ermittelten Ortung anstellen möchte ;) )
 
 
 ### Die Ortung
