@@ -66,7 +66,7 @@ For the view [Index.cshtml](https://gist.github.com/gideondsouza/4284335) should
             $(function () {
                 $('#file_upload').uploadify({
                     'swf': "@Url.Content("~/Content/uploadify.swf")",
-                    //this is where the file posts when it uploads.
+                    //this url is where the file is sent via POST when it uploads.
                     'uploader': "@Url.Action("Upload", "Home")",
                     'onUploadSuccess' : function(file, data, response) {
                       //data is whatever you return from the server
